@@ -89,7 +89,6 @@ export default {
     },
 
     deleteItem(item) {
-      console.log('delete clicked')
       this.editedIndex = this.desserts.indexOf(item)
       this.dialogDelete = true
     },
