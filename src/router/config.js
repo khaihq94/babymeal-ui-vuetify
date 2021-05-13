@@ -65,7 +65,7 @@ export const protectedRoute = [
       },
       //Age
       {
-        path: '/age',
+        path: '/ages',
         meta: {
           title: 'Age',
           icon: 'mdi-baby',
@@ -76,29 +76,28 @@ export const protectedRoute = [
         }),
         component: () => import('@/views/Ages.vue'),
       },
-      /* {
-        path: '/age/create',
-        meta: {
-          title: 'Age / Create',
-          hidden: true
-        },
-        name: 'age-create',
-        component: () => import('@/views/form/TranslationForm.vue'),
-      }, */
       {
-        path: '/age',
+        path: '/ages',
         component: RouteWrapper,
         meta: {
           title: 'Age',
           hidden: true
         },
-        redirect: '/age/create',
+        redirect: '/ages/create',
         children: [
           {
-            path: '/age/create',
+            path: '/ages/create',
             name: 'age-create',
             meta: {
               title: 'Create',
+            },
+            component: () => import('@/views/form/TranslationForm.vue'),
+          },
+          {
+            path: '/ages/:ageId',
+            name: 'age-edit',
+            meta: {
+              title: 'Edit',
             },
             component: () => import('@/views/form/TranslationForm.vue'),
           },
