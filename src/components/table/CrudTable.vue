@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-btn color="primary" tile class="mb-5" :to="createUrl">
+    <v-btn color="primary" tile class="mb-5" :to="createEditPageUrl">
       <v-icon left> mdi-plus </v-icon>
       Create
     </v-btn>
@@ -36,7 +36,8 @@ export default {
       headers: [Object],
       items: [Object],
     },
-    createUrl: Object,
+    createEditPageUrl: Object,
+    apiBaseUrl: String
   },
   data: () => ({
     dialogDelete: false,

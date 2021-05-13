@@ -41,7 +41,7 @@ const actions = {
   },
   login({ commit, dispatch }, { username, password }) {
     return request({
-      url: '/auth/login',
+      url: '/admin/auth/login',
       method: 'post',
       data: {
         username,
@@ -54,7 +54,7 @@ const actions = {
   },
   register({ commit, dispatch }, data) {
     return request({
-      url: '/auth/register',
+      url: '/admin/auth/register',
       method: 'post',
       data: data,
     }).then((resp) => {
@@ -71,7 +71,7 @@ const actions = {
 
   fetchProfile({ commit, dispatch, rootState }) {
     return request({
-      url: '/me',
+      url: '/admin/me',
       method: 'get',
     }).then((resp) => {
       commit('SET_LOGIN_PROFILE', resp.data)

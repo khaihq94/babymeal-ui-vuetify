@@ -101,7 +101,7 @@ export default {
           .dispatch('demoLogin', this.formModel)
           .then(() => {
             const redirect = this.$route.query.redirect
-            const route = redirect ? { path: redirect } : { path: '/' }
+            const route = redirect ? { path: redirect } : { path: '/admin/' }
             this.$router.push(route)
             this.loading = false
           })
