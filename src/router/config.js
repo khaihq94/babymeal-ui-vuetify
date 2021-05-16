@@ -63,41 +63,142 @@ export const protectedRoute = [
         },
         component: () => import('@/views/Dashboard.vue'),
       },
+      //Recipe
+      {
+        path: '/admin/recipes',
+        meta: {
+          title: 'recipe',
+          icon: 'mdi-noodles',
+        },
+        name: 'Recipe',
+        component: () => import('@/views/Recipes.vue'),
+      },
+      {
+        path: '/admin/recipes',
+        component: RouteWrapper,
+        meta: {
+          title: 'recipe',
+          hidden: true
+        },
+        children: [
+          {
+            path: '/admin/recipes/create',
+            name: 'recipe-create',
+            meta: {
+              title: 'create',
+            },
+            component: () => import('@/views/form/RecipeForm.vue'),
+          },
+          {
+            path: '/admin/recipes/:id',
+            name: 'recipe-edit',
+            meta: {
+              title: 'edit',
+            },
+            component: () => import('@/views/form/RecipeForm.vue'),
+          },
+        ],
+      },
       //Age
       {
         path: '/admin/ages',
         meta: {
-          title: 'Age',
+          title: 'age',
           icon: 'mdi-baby',
         },
-        name: 'Age',
-        props: (route) => ({
-          type: route.query.type,
-        }),
         component: () => import('@/views/Ages.vue'),
       },
       {
         path: '/admin/ages',
         component: RouteWrapper,
         meta: {
-          title: 'Age',
+          title: 'age',
           hidden: true
         },
-        redirect: '/admin/ages/create',
         children: [
           {
             path: '/admin/ages/create',
             name: 'age-create',
             meta: {
-              title: 'Create',
+              title: 'create',
             },
             component: () => import('@/views/form/TranslationForm.vue'),
           },
           {
-            path: '/admin/ages/:ageId',
+            path: '/admin/ages/:id',
             name: 'age-edit',
             meta: {
-              title: 'Edit',
+              title: 'edit',
+            },
+            component: () => import('@/views/form/TranslationForm.vue'),
+          },
+        ],
+      },
+      //Dish
+      {
+        path: '/admin/dishes',
+        meta: {
+          title: 'dish',
+          icon: 'mdi-silverware-fork-knife',
+        },
+        component: () => import('@/views/Dishes.vue'),
+      },
+      {
+        path: '/admin/dishes',
+        component: RouteWrapper,
+        meta: {
+          title: 'dish',
+          hidden: true
+        },
+        children: [
+          {
+            path: '/admin/dishes/create',
+            name: 'dish-create',
+            meta: {
+              title: 'create',
+            },
+            component: () => import('@/views/form/TranslationForm.vue'),
+          },
+          {
+            path: '/admin/dishes/:id',
+            name: 'dish-edit',
+            meta: {
+              title: 'edit',
+            },
+            component: () => import('@/views/form/TranslationForm.vue'),
+          },
+        ],
+      },
+      //Ingredient
+      {
+        path: '/admin/ingredients',
+        meta: {
+          title: 'ingredient',
+          icon: 'mdi-corn',
+        },
+        component: () => import('@/views/Ingredients.vue'),
+      },
+      {
+        path: '/admin/ingredients',
+        component: RouteWrapper,
+        meta: {
+          title: 'ingredient',
+          hidden: true
+        },
+        children: [
+          {
+            path: '/admin/ingredients/create',
+            name: 'ingredient-create',
+            meta: {
+              title: 'create',
+            },
+            component: () => import('@/views/form/TranslationForm.vue'),
+          },
+          {
+            path: '/admin/ingredients/:id',
+            name: 'ingredient-edit',
+            meta: {
+              title: 'edit',
             },
             component: () => import('@/views/form/TranslationForm.vue'),
           },

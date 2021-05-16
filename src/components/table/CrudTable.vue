@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-btn color="primary" tile class="mb-5" :to="createEditPageUrl">
+    <v-btn color="primary" tile class="mb-5" :to="getCreateUrl()">
       <v-icon left> mdi-plus </v-icon>
       Create
     </v-btn>
@@ -19,8 +19,8 @@
         <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="closeDeleteDialog">Cancel</v-btn>
-          <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+          <v-btn color="blue darken-1" outlined @click="closeDeleteDialog">Cancel</v-btn>
+          <v-btn color="red" outlined @click="deleteItemConfirm">OK</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
@@ -36,7 +36,10 @@ export default {
       headers: [Object],
       items: [Object],
     },
-    createEditPageUrl: Object,
+    redirectPageUrlName: {
+      create: String,
+      edit: String,
+    },
     apiBaseUrl: String
   },
   data: () => ({
@@ -49,8 +52,11 @@ export default {
     },
   },
   methods: {
+    getCreateUrl() {
+      return this.$route.fullPath + '/create'
+    },
     editItem(item) {
-      this.editedIndex = this.tableData.items.indexOf(item)
+      this.$router.push(this.$route.fullPath + '/' + item.id)
     },
 
     deleteItem(item) {
