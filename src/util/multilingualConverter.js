@@ -5,17 +5,17 @@ export default class MultilingualConverter {
     const currentLanguage = store.getters.getLocale
     var filteredItems = []
     items.forEach((item) => {
-      const names = item.names.find((name) => name.lang === currentLanguage)
-      var name = ''
-      if (names !== undefined) {
-        name = names.name
+      const name = item.names.find((name) => name.language === currentLanguage)
+      var content = ''
+      if (name !== undefined) {
+        content = name.content
       } else if (item.names !== undefined && item.names.length != 0) {
-        name = item.names[0].name
+        content = item.names[0].name
       }
-      if (name !== '') {
+      if (content !== '') {
         filteredItems.push({
           id: item.id,
-          name: name,
+          content: content,
         })
       }
     })

@@ -29,8 +29,8 @@ export default {
   data: () => ({
     names: [
       {
-        lang: '',
-        name: '',
+        language: '',
+        content: '',
       },
     ],
   }),
@@ -42,8 +42,8 @@ export default {
     },
     addItem() {
       this.names.push({
-        lang: '',
-        name: '',
+        language: '',
+        content: '',
       })
     },
     removeItem(index) {

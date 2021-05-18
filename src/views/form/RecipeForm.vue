@@ -13,19 +13,19 @@
             </v-row>
             <translation :items="recipe.names" @addItem="addName" @removeItem="removeName" />
             <v-row>
-              <v-col col="6">
+              <v-col cols="4" lg="5">
                 <v-autocomplete
                   :items="getTranslationItems(ages)"
                   :filter="customFilter"
-                  item-text="name"
+                  item-text="content"
                   :label="$t('age')"
                 />
               </v-col>
-              <v-col col="6">
+              <v-col col="6" lg="6">
                 <v-autocomplete
                   :items="getTranslationItems(dishes)"
                   :filter="customFilter"
-                  item-text="name"
+                  item-text="content"
                   :label="$t('dish')"
                 />
               </v-col>
@@ -56,12 +56,12 @@ export default {
         id: 1,
         names: [
           {
-            lang: 'vi',
-            name: 'Món chính',
+            language: 'vi',
+            content: 'Món chính',
           },
           {
-            lang: 'en',
-            name: 'Main dish',
+            language: 'en',
+            content: 'Main dish',
           },
         ],
       },
@@ -69,12 +69,12 @@ export default {
         id: 2,
         names: [
           {
-            lang: 'vi',
-            name: 'Món phụ',
+            language: 'vi',
+            content: 'Món phụ',
           },
           {
-            lang: 'en',
-            name: 'Side dish',
+            language: 'en',
+            content: 'Side dish',
           },
         ],
       },
@@ -84,12 +84,12 @@ export default {
         id: 1,
         names: [
           {
-            lang: 'vi',
-            name: '5-8 tháng',
+            language: 'vi',
+            content: '5-8 tháng',
           },
           {
-            lang: 'en',
-            name: '5-8 months',
+            language: 'en',
+            content: '5-8 months',
           },
         ],
       },
@@ -97,12 +97,12 @@ export default {
         id: 2,
         names: [
           {
-            lang: 'vi',
-            name: '9-12 tháng',
+            language: 'vi',
+            content: '9-12 tháng',
           },
           {
-            lang: 'en',
-            name: '9-12 months',
+            language: 'en',
+            content: '9-12 months',
           },
         ],
       },
@@ -110,14 +110,14 @@ export default {
     recipe: {
       names: [
         {
-          lang: '',
-          name: '',
+          language: '',
+          content: '',
         },
       ],
       steps: [
         {
-          lang: '',
-          name: '',
+          language: '',
+          content: '',
         },
       ],
       dishId: '',
@@ -126,8 +126,8 @@ export default {
         {
           unit: [
             {
-              lang: '',
-              name: '',
+              language: '',
+              content: '',
             },
           ],
           ingredientId: '',
@@ -137,8 +137,8 @@ export default {
     },
     names: [
       {
-        lang: '',
-        name: '',
+        language: '',
+        content: '',
       },
     ],
   }),
@@ -150,8 +150,8 @@ export default {
     },
     addName() {
       this.recipe.names.push({
-        lang: '',
-        name: '',
+        language: '',
+        content: '',
       })
     },
     removeName(index) {
@@ -164,7 +164,7 @@ export default {
       return MultilingualConverter.buildItemsByCurrentLanguage(items)
     },
     customFilter(item, queryText, itemText) {
-      const text = MultilingualConverter.stringToSlug(item.name)
+      const text = MultilingualConverter.stringToSlug(item.content)
       const searchText = MultilingualConverter.stringToSlug(queryText)
       return text.indexOf(searchText) > -1
     },
