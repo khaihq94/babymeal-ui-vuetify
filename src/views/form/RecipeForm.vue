@@ -2,12 +2,12 @@
   <div>
     <v-container>
       <v-card tile>
-        <v-card-title> {{ getPageTitle() }} </v-card-title>
+        <v-card-title> {{ $t(getPageTitle()) }} </v-card-title>
         <v-divider />
         <v-card-text>
           <v-form ref="form">
             <v-row>
-              <v-col col="12">
+              <v-col col="11">
                 <h2 class="text-subtitle-1">Name</h2>
               </v-col>
             </v-row>
@@ -19,6 +19,7 @@
                   :filter="customFilter"
                   item-text="content"
                   :label="$t('age')"
+                  v-model="recipe.ageId"
                 />
               </v-col>
               <v-col col="6" lg="6">
@@ -27,7 +28,19 @@
                   :filter="customFilter"
                   item-text="content"
                   :label="$t('dish')"
+                  v-model="recipe.dishId"
                 />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="11">
+                <v-text-field v-model="recipe.source" :label="$t('source')" />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="11">
+                <h2 class="text-subtitle-1">Note</h2>
+                <tiptap-vuetify v-model="recipe.note" :extensions="extensions" />
               </v-col>
             </v-row>
           </v-form>
@@ -44,13 +57,55 @@
 <script>
 import Translation from '@/components/elements/Translation'
 import MultilingualConverter from '@/util/multilingualConverter'
+import {
+  TiptapVuetify,
+  Heading,
+  Bold,
+  Italic,
+  Strike,
+  Underline,
+  Code,
+  Paragraph,
+  BulletList,
+  OrderedList,
+  ListItem,
+  Link,
+  Blockquote,
+  HardBreak,
+  HorizontalRule,
+  History,
+} from 'tiptap-vuetify'
 
 export default {
   name: 'TranslationForm',
   components: {
     Translation,
+    TiptapVuetify,
   },
   data: () => ({
+    extensions: [
+      History,
+      Blockquote,
+      Link,
+      Strike,
+      Bold,
+      Italic,
+      Underline,
+      ListItem,
+      BulletList,
+      OrderedList,
+      [
+        Heading,
+        {
+          options: {
+            levels: [1, 2, 3],
+          },
+        },
+      ],
+      HorizontalRule,
+      Paragraph,
+      HardBreak,
+    ],
     dishes: [
       {
         id: 1,
@@ -124,16 +179,13 @@ export default {
       ageId: '',
       recipeIngredients: [
         {
-          unit: [
-            {
-              language: '',
-              content: '',
-            },
-          ],
+          unitId: '',
           ingredientId: '',
         },
       ],
       suggestionRecipeId: '',
+      source: '',
+      note: '',
     },
     names: [
       {
@@ -145,8 +197,8 @@ export default {
   computed: {},
   methods: {
     getPageTitle() {
-      if (this.$route.params.id === undefined) return 'Create'
-      return 'Edit'
+      if (this.$route.params.id === undefined) return 'create'
+      return 'edit'
     },
     addName() {
       this.recipe.names.push({

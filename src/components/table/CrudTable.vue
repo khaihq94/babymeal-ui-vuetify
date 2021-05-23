@@ -2,7 +2,7 @@
   <v-container>
     <v-btn color="primary" tile class="mb-5" :to="getCreateUrl()">
       <v-icon left> mdi-plus </v-icon>
-      Create
+      {{ $t('create') }}
     </v-btn>
     <v-data-table :headers="tableData.headers" :items="tableData.items" :items-per-page="5" class="elevation-1">
       <template v-slot:[`item.actions`]="{ item }">
@@ -40,7 +40,7 @@ export default {
       create: String,
       edit: String,
     },
-    apiBaseUrl: String
+    apiBaseUrl: String,
   },
   data: () => ({
     dialogDelete: false,
