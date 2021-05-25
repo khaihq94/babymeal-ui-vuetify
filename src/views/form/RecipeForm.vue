@@ -7,7 +7,7 @@
         <v-card-text>
           <v-form ref="form">
             <v-row>
-              <v-col col="11">
+              <v-col cols="10" lg="11">
                 <h2 class="text-subtitle-1">Name</h2>
               </v-col>
             </v-row>
@@ -33,12 +33,12 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="11">
+              <v-col cols="10" lg="11">
                 <v-text-field v-model="recipe.source" :label="$t('source')" />
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="11">
+              <v-col cols="10" lg="11">
                 <h2 class="text-subtitle-1">Note</h2>
                 <tiptap-vuetify v-model="recipe.note" :extensions="extensions" />
               </v-col>
@@ -163,29 +163,43 @@ export default {
       },
     ],
     recipe: {
+      id: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
       names: [
         {
-          language: '',
-          content: '',
+          language: 'vi',
+          content: 'content in language',
         },
       ],
-      steps: [
-        {
-          language: '',
-          content: '',
-        },
-      ],
-      dishId: '',
-      ageId: '',
+      ageId: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
       recipeIngredients: [
         {
-          unitId: '',
-          ingredientId: '',
+          unitId: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
+          ingredientId: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
         },
       ],
-      suggestionRecipeId: '',
-      source: '',
-      note: '',
+      suggestionRecipesId: ['3f3a70b3-48db-4c3d-815f-e40088811cb1'],
+      dishId: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
+      mainImageId: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
+      imagesId: ['3f3a70b3-48db-4c3d-815f-e40088811cb1'],
+      preparationTime: [
+        {
+          language: 'vi',
+          content: 'content in language',
+        },
+      ],
+      videoUrl: 'https://www.youtube.com/',
+      sources: [
+        {
+          language: 'vi',
+          content: 'content in language',
+        },
+      ],
+      notes: [
+        {
+          language: 'vi',
+          content: 'content in language',
+        },
+      ],
     },
     names: [
       {
