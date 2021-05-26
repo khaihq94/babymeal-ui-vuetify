@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row v-for="(item, index) in items" :key="index" align="center" justify="center">
+    <v-row v-for="(item, index) in unit.contents" :key="index" align="center" justify="center">
       <v-col cols="4" lg="5">
         <v-select
           v-model="item.language"
@@ -10,6 +10,7 @@
           :rules="form.language.rules"
         >
           <template v-slot:item="data">{{ $t(data.item) }}</template>
+          <template v-slot:selection="data">{{ $t(data.item) }}</template>
         </v-select>
       </v-col>
       <v-col col="6" lg="6">
@@ -33,11 +34,13 @@
 </template>
 
 <script>
+import UnitModel from '@/model/UnitModel'
+
 export default {
   name: 'Unit',
   props: {
-    items: {
-      type: Array,
+    unit: {
+      type: UnitModel,
       required: true,
     },
   },
@@ -45,15 +48,15 @@ export default {
     isReachMaxSupportedLang: false,
     form: {
       language: {
-        label: 'Language',
+        label: 'language',
         rules: [(v) => !!v || 'This field is required'],
       },
       content: {
-        label: 'Name',
+        label: 'name',
         rules: [(v) => !!v || 'This field is required'],
       },
       description: {
-        label: 'Description',
+        label: 'description',
         rules: [],
       },
     },
@@ -69,14 +72,14 @@ export default {
       this.handleDisableAddButton()
     },
     handleDisableAddButton() {
-      if ((this.items?.length | 0) >= this.availableLang.length) {
+      if ((this.unit?.contents?.length | 0) >= this.availableLang.length) {
         this.isReachMaxSupportedLang = true
       } else {
         this.isReachMaxSupportedLang = false
       }
     },
     isRenderDeleteButton() {
-      return (this.items?.length | 0) > 1
+      return (this.unit?.contents?.length | 0) > 1
     },
   },
 }

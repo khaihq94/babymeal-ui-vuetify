@@ -6,7 +6,7 @@
         <v-divider />
         <v-card-text>
           <v-form ref="form">
-            <unit :items="contents" @addItem="addItem" @removeItem="removeItem" />
+            <unit :unit="unit" @addItem="addItem" @removeItem="removeItem" />
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -20,6 +20,8 @@
 
 <script>
 import Unit from '@/components/elements/Unit'
+import UnitModel from '@/model/UnitModel'
+import UnitContent from '@/model/UnitContent'
 
 export default {
   name: 'UnitForm',
@@ -27,13 +29,7 @@ export default {
     Unit,
   },
   data: () => ({
-    contents: [
-      {
-        language: '',
-        content: '',
-        description: '',
-      },
-    ],
+    unit: new UnitModel(),
   }),
   computed: {},
   methods: {
@@ -42,17 +38,13 @@ export default {
       return 'edit'
     },
     addItem() {
-      this.contents.push({
-        language: '',
-        content: '',
-        description: '',
-      })
+      this.unit.contents.push(new UnitContent())
     },
     removeItem(index) {
-      this.contents.splice(index, 1)
+      this.unit.contents.splice(index, 1)
     },
     save() {
-      console.log(this.$route.params.id)
+      console.log(this.unit)
     },
   },
 }
