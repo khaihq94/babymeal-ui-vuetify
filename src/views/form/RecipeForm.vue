@@ -11,7 +11,12 @@
                 <h2 class="text-subtitle-1">Name</h2>
               </v-col>
             </v-row>
-            <translation :items="recipe.names" @addItem="addName" @removeItem="removeName" />
+            <v-row>
+              <v-col >
+                <translation :items="recipe.names" @addItem="addName" @removeItem="removeName" />
+                <v-divider />
+              </v-col>
+            </v-row>
             <v-row>
               <v-col cols="4" lg="5">
                 <v-autocomplete
@@ -57,6 +62,9 @@
 <script>
 import Translation from '@/components/elements/Translation'
 import MultilingualConverter from '@/util/multilingualConverter'
+import RecipeModel from '@/model/RecipeModel'
+import TranslationModel from '@/model/TranslationModel'
+
 import {
   TiptapVuetify,
   Heading,
@@ -162,45 +170,7 @@ export default {
         ],
       },
     ],
-    recipe: {
-      id: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
-      names: [
-        {
-          language: 'vi',
-          content: 'content in language',
-        },
-      ],
-      ageId: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
-      recipeIngredients: [
-        {
-          unitId: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
-          ingredientId: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
-        },
-      ],
-      suggestionRecipesId: ['3f3a70b3-48db-4c3d-815f-e40088811cb1'],
-      dishId: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
-      mainImageId: '3f3a70b3-48db-4c3d-815f-e40088811cb1',
-      imagesId: ['3f3a70b3-48db-4c3d-815f-e40088811cb1'],
-      preparationTime: [
-        {
-          language: 'vi',
-          content: 'content in language',
-        },
-      ],
-      videoUrl: 'https://www.youtube.com/',
-      sources: [
-        {
-          language: 'vi',
-          content: 'content in language',
-        },
-      ],
-      notes: [
-        {
-          language: 'vi',
-          content: 'content in language',
-        },
-      ],
-    },
+    recipe: new RecipeModel(),
     names: [
       {
         language: '',
@@ -215,10 +185,7 @@ export default {
       return 'edit'
     },
     addName() {
-      this.recipe.names.push({
-        language: '',
-        content: '',
-      })
+      this.recipe.names.push(new TranslationModel())
     },
     removeName(index) {
       this.recipe.names.splice(index, 1)

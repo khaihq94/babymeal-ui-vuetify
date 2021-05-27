@@ -1,8 +1,6 @@
-import UnitContent from '@/model/UnitContent'
+import UnitContentModel from '@/model/UnitContentModel'
 
 export default class UnitModel {
   id = ''
-  contents = [
-    UnitContent
-  ]
+  contents = [UnitContentModel]
 }

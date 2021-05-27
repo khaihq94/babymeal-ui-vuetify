@@ -2,11 +2,11 @@
   <div>
     <v-container>
       <v-card tile>
-        <v-card-title> {{ getPageTitle() }} </v-card-title>
+        <v-card-title> {{ $t(getPageTitle()) }} </v-card-title>
         <v-divider />
         <v-card-text>
           <v-form ref="form">
-            <translation :items="names" @addItem="addItem" @removeItem="removeItem" />
+            <translation :items="contents" @addItem="addItem" @removeItem="removeItem" />
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -20,6 +20,7 @@
 
 <script>
 import Translation from '@/components/elements/Translation'
+import TranslationModel from '@/model/TranslationModel'
 
 export default {
   name: 'TranslationForm',
@@ -27,27 +28,19 @@ export default {
     Translation,
   },
   data: () => ({
-    names: [
-      {
-        language: '',
-        content: '',
-      },
-    ],
+    contents: [TranslationModel],
   }),
   computed: {},
   methods: {
     getPageTitle() {
-      if (this.$route.params.id === undefined) return 'Create'
-      return 'Edit'
+      if (this.$route.params.id === undefined) return 'create'
+      return 'edit'
     },
     addItem() {
-      this.names.push({
-        language: '',
-        content: '',
-      })
+      this.contents.push(new TranslationModel())
     },
     removeItem(index) {
-      this.names.splice(index, 1)
+      this.contents.splice(index, 1)
     },
     save() {
       console.log(this.$route.params.id)

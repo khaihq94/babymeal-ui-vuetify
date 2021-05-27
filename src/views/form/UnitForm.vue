@@ -6,7 +6,7 @@
         <v-divider />
         <v-card-text>
           <v-form ref="form">
-            <unit :unit="unit" @addItem="addItem" @removeItem="removeItem" />
+            <unit :unit="unit" :rules="rules" @addItem="addItem" @removeItem="removeItem" />
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -21,7 +21,8 @@
 <script>
 import Unit from '@/components/elements/Unit'
 import UnitModel from '@/model/UnitModel'
-import UnitContent from '@/model/UnitContent'
+import UnitContentModel from '@/model/UnitContentModel'
+import UnitRule from '@/model/UnitRule'
 
 export default {
   name: 'UnitForm',
@@ -30,6 +31,7 @@ export default {
   },
   data: () => ({
     unit: new UnitModel(),
+    rules: new UnitRule(),
   }),
   computed: {},
   methods: {
@@ -38,13 +40,19 @@ export default {
       return 'edit'
     },
     addItem() {
-      this.unit.contents.push(new UnitContent())
+      this.unit.contents.push(new UnitContentModel())
     },
     removeItem(index) {
       this.unit.contents.splice(index, 1)
     },
     save() {
-      console.log(this.unit)
+      this.rules.content = [(v) => !!v || this.$t('requiredField')]
+      this.rules.language = [(v) => !!v || this.$t('requiredField')]
+      this.$nextTick(() => {
+        if (this.$refs.form.validate()) {
+          console.log(this.unit)
+        }
+      })
     },
   },
 }

@@ -2,20 +2,14 @@
   <div>
     <v-row v-for="(item, index) in unit.contents" :key="index" align="center" justify="center">
       <v-col cols="4" lg="5">
-        <v-select
-          v-model="item.language"
-          :items="availableLang"
-          :label="form.language.label"
-          required
-          :rules="form.language.rules"
-        >
+        <v-select v-model="item.language" :items="availableLang" :label="$t('language')" :rules="rules.language">
           <template v-slot:item="data">{{ $t(data.item) }}</template>
           <template v-slot:selection="data">{{ $t(data.item) }}</template>
         </v-select>
       </v-col>
       <v-col col="6" lg="6">
-        <v-text-field v-model="item.content" :label="form.content.label" required :rules="form.content.rules" />
-        <v-text-field v-model="item.description" :label="form.description.label" required :rules="form.content.rules" />
+        <v-text-field v-model="item.content" :label="$t('name')" :rules="rules.content" />
+        <v-text-field v-model="item.description" :label="$t('description')" :rules="rules.description" />
       </v-col>
       <v-col cols="2" lg="1">
         <v-btn icon color="red" @click="removeName(index)" v-if="isRenderDeleteButton()">
@@ -35,6 +29,7 @@
 
 <script>
 import UnitModel from '@/model/UnitModel'
+import UnitRule from '@/model/UnitRule'
 
 export default {
   name: 'Unit',
@@ -43,23 +38,14 @@ export default {
       type: UnitModel,
       required: true,
     },
+    rules: {
+      type: UnitRule,
+      required: false,
+      default: () => new UnitRule(),
+    },
   },
   data: () => ({
     isReachMaxSupportedLang: false,
-    form: {
-      language: {
-        label: 'language',
-        rules: [(v) => !!v || 'This field is required'],
-      },
-      content: {
-        label: 'name',
-        rules: [(v) => !!v || 'This field is required'],
-      },
-      description: {
-        label: 'description',
-        rules: [],
-      },
-    },
     availableLang: ['vi', 'en'],
   }),
   methods: {
