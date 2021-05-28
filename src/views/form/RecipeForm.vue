@@ -7,11 +7,16 @@
         <v-card-text>
           <v-form ref="form">
             <v-row>
-              <v-col col="11">
+              <v-col cols="10" lg="11">
                 <h2 class="text-subtitle-1">Name</h2>
               </v-col>
             </v-row>
-            <translation :items="recipe.names" @addItem="addName" @removeItem="removeName" />
+            <v-row>
+              <v-col >
+                <translation :items="recipe.names" @addItem="addName" @removeItem="removeName" />
+                <v-divider />
+              </v-col>
+            </v-row>
             <v-row>
               <v-col cols="4" lg="5">
                 <v-autocomplete
@@ -35,12 +40,12 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="11">
+              <v-col cols="10" lg="11">
                 <v-text-field v-model="recipe.source" :label="$t('source')" />
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="11">
+              <v-col cols="10" lg="11">
                 <h2 class="text-subtitle-1">Note</h2>
                 <tiptap-vuetify v-model="recipe.note" :extensions="extensions" />
               </v-col>
@@ -59,6 +64,9 @@
 <script>
 import Translation from '@/components/elements/Translation'
 import MultilingualConverter from '@/util/multilingualConverter'
+import RecipeModel from '@/model/RecipeModel'
+import TranslationModel from '@/model/TranslationModel'
+
 import {
   TiptapVuetify,
   Heading,
@@ -164,31 +172,7 @@ export default {
         ],
       },
     ],
-    recipe: {
-      names: [
-        {
-          language: '',
-          content: '',
-        },
-      ],
-      steps: [
-        {
-          language: '',
-          content: '',
-        },
-      ],
-      dishId: '',
-      ageId: '',
-      recipeIngredients: [
-        {
-          unitId: '',
-          ingredientId: '',
-        },
-      ],
-      suggestionRecipeId: '',
-      source: '',
-      note: '',
-    },
+    recipe: new RecipeModel(),
     names: [
       {
         language: '',
@@ -203,10 +187,7 @@ export default {
       return 'edit'
     },
     addName() {
-      this.recipe.names.push({
-        language: '',
-        content: '',
-      })
+      this.recipe.names.push(new TranslationModel())
     },
     removeName(index) {
       this.recipe.names.splice(index, 1)

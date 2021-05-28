@@ -17,6 +17,7 @@
   "ingredient": "Nguyên liệu",
   "create": "Tạo mới",
   "edit": "Sửa",
+  "requiredField": "Vui lòng nhập giá trị",
   "task": "Task",
   "CMS": "CMS",
   "widget": "Widget",

@@ -204,6 +204,41 @@ export const protectedRoute = [
           },
         ],
       },
+      //Unit
+      {
+        path: '/admin/units',
+        meta: {
+          title: 'unit',
+          icon: 'mdi-ruler',
+        },
+        component: () => import('@/views/Units.vue'),
+      },
+      {
+        path: '/admin/units',
+        component: RouteWrapper,
+        meta: {
+          title: 'unit',
+          hidden: true
+        },
+        children: [
+          {
+            path: '/admin/units/create',
+            name: 'unit-create',
+            meta: {
+              title: 'create',
+            },
+            component: () => import('@/views/form/UnitForm.vue'),
+          },
+          {
+            path: '/admin/units/:id',
+            name: 'unit-edit',
+            meta: {
+              title: 'edit',
+            },
+            component: () => import('@/views/form/UnitForm.vue'),
+          },
+        ],
+      },
       //calendar
       {
         path: '/admin/calendar',
