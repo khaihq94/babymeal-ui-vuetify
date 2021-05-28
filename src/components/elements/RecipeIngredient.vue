@@ -1,25 +1,30 @@
 <template>
   <div>
-    <v-row v-for="(item, index) in ingredients" :key="index" align="center" justify="center">
-      <v-col cols="4" lg="5">
+    <v-row v-for="(item, index) in model" :key="index" align="center" justify="center">
+      <v-col cols="1" lg="1">
+        <v-text-field v-model="item.quantity" :label="$t('quantity')" type="number" min="1" :rules="rules.quantity"/>
+      </v-col>
+      <v-col cols="5" lg="5">
         <v-autocomplete
-          :items="getTranslationItems(ages)"
+          :items="getTranslationItems(viewBean.units)"
           :filter="customFilter"
           item-text="content"
           :label="$t('unit')"
           v-model="item.unitId"
+          :rules="rules.unit"
         />
       </v-col>
-      <v-col col="6" lg="6">
+      <v-col col="5" lg="5">
         <v-autocomplete
-          :items="getTranslationItems(dishes)"
+          :items="getTranslationItems(viewBean.ingredients)"
           :filter="customFilter"
           item-text="content"
           :label="$t('ingredient')"
           v-model="item.ingredientId"
+          :rules="rules.ingredient"
         />
       </v-col>
-      <v-col cols="2" lg="1">
+      <v-col cols="1" lg="1">
         <v-btn icon color="red" @click="removeItem(index)" v-if="isRenderDeleteButton()">
           <v-icon>mdi-delete</v-icon>
         </v-btn>
@@ -36,16 +41,29 @@
 </template>
 
 <script>
+import MultilingualConverter from '@/util/multilingualConverter'
+
 export default {
   name: 'RecipeIngredient',
   props: {
-    ingredients: {
+    viewBean: {
+      type: Object,
+      required: true,
+    },
+    model: {
       type: Array,
       required: true,
     },
   },
-  data: () => ({
-  }),
+  data() {
+    return {
+      rules: {
+        quantity: [(v) => !!v || this.$t('requiredField')],
+        unit: [(v) => !!v || this.$t('requiredField')],
+        ingredient: [(v) => !!v || this.$t('requiredField')],
+      }
+    }
+  },
   methods: {
     addMoreItem() {
       this.$emit('addItem')
@@ -54,7 +72,15 @@ export default {
       this.$emit('removeItem', index)
     },
     isRenderDeleteButton() {
-      return (this.items?.length | 0) > 1
+      return (this.model?.length | 0) > 1
+    },
+    getTranslationItems(items) {
+      return MultilingualConverter.buildItemsByCurrentLanguage(items)
+    },
+    customFilter(item, queryText, itemText) {
+      const text = MultilingualConverter.stringToSlug(item.content)
+      const searchText = MultilingualConverter.stringToSlug(queryText)
+      return text.indexOf(searchText) > -1
     },
   },
 }

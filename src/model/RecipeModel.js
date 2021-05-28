@@ -3,7 +3,7 @@ import RecipeIngredientModel from '@/model/RecipeIngredientModel'
 
 export default class RecipeModel {
   id = ''
-  names = [TranslationModel]
+  name = [TranslationModel]
   ageId = ''
   dishId = ''
   recipeIngredients = [RecipeIngredientModel]
@@ -12,6 +12,6 @@ export default class RecipeModel {
   imagesId = [String]
   preparationTime = [TranslationModel]
   videoUrl = ''
-  sources = [TranslationModel]
-  notes = [TranslationModel]
+  source = []
+  note = []
 }

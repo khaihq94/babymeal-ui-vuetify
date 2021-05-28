@@ -1,5 +1,5 @@
 <template>
-  <div class="page-ages">
+  <div class="page-ingredients">
     <v-container>
         <crud-table :tableData="tableData"
           @removeItem="removeItem"

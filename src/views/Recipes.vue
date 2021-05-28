@@ -1,5 +1,5 @@
 <template>
-  <div class="page-ages">
+  <div class="page-recipes">
     <v-container>
         <crud-table :tableData="tableData"
           @removeItem="removeItem"
@@ -11,7 +11,7 @@
 <script>
 import CrudTable from '@/components/table/CrudTable'
 export default {
-  name: 'Age',
+  name: 'Recipe',
   components: {
     CrudTable,
   },

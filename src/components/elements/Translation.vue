@@ -6,7 +6,6 @@
           v-model="item.language"
           :items="availableLang"
           :label="form.language.label"
-          required
           :rules="form.language.rules"
         >
           <template v-slot:item="data">{{ $t(data.item) }}</template>
@@ -14,7 +13,8 @@
         </v-select>
       </v-col>
       <v-col col="6" lg="6">
-        <v-text-field v-model="item.content" :label="form.content.label" required :rules="form.content.rules" />
+        <tiptap-vuetify v-if="isEditorTextField" v-model="item.content" :extensions="extensions" :rules="form.content.rules" />
+        <v-text-field v-else v-model="item.content" :label="form.content.label" :rules="form.content.rules" />
       </v-col>
       <v-col cols="2" lg="1">
         <v-btn icon color="red" @click="removeName(index)" v-if="isRenderDeleteButton()">
@@ -33,28 +33,84 @@
 </template>
 
 <script>
+import {
+  TiptapVuetify,
+  Heading,
+  Bold,
+  Italic,
+  Strike,
+  Underline,
+  Paragraph,
+  BulletList,
+  OrderedList,
+  ListItem,
+  Link,
+  Blockquote,
+  HardBreak,
+  HorizontalRule,
+  History,
+} from 'tiptap-vuetify'
+
 export default {
   name: 'Translation',
+  components: {
+    TiptapVuetify,
+  },
   props: {
     items: {
       type: Array,
       required: true,
     },
-  },
-  data: () => ({
-    isReachMaxSupportedLang: false,
-    form: {
-      language: {
-        label: 'Language',
-        rules: [(v) => !!v || 'This field is required'],
-      },
-      content: {
-        label: 'Name',
-        rules: [(v) => !!v || 'This field is required'],
-      },
+    isEditorTextField: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
-    availableLang: ['vi', 'en'],
-  }),
+    minItem: {
+      type: Number,
+      required: false,
+      default: 1,
+    },
+  },
+  data() {
+    return {
+      isReachMaxSupportedLang: false,
+      form: {
+        language: {
+          label: this.$t('language'),
+          rules: [(v) => !!v || this.$t('requiredField')],
+        },
+        content: {
+          label: '',
+          rules: [(v) => !!v || this.$t('requiredField')],
+        },
+      },
+      availableLang: ['vi', 'en'],
+      extensions: [
+        History,
+        Blockquote,
+        Link,
+        Strike,
+        Bold,
+        Italic,
+        Underline,
+        ListItem,
+        BulletList,
+        OrderedList,
+        [
+          Heading,
+          {
+            options: {
+              levels: [1, 2, 3],
+            },
+          },
+        ],
+        HorizontalRule,
+        Paragraph,
+        HardBreak,
+      ],
+    }
+  },
   methods: {
     addMoreLang() {
       this.$emit('addItem')
@@ -72,7 +128,7 @@ export default {
       }
     },
     isRenderDeleteButton() {
-      return (this.items?.length | 0) > 1
+      return (this.items?.length | 0) > this.minItem
     },
   },
 }

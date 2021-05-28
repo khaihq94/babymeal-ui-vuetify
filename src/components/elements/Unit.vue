@@ -29,7 +29,6 @@
 
 <script>
 import UnitModel from '@/model/UnitModel'
-import UnitRule from '@/model/UnitRule'
 
 export default {
   name: 'Unit',
@@ -38,16 +37,17 @@ export default {
       type: UnitModel,
       required: true,
     },
-    rules: {
-      type: UnitRule,
-      required: false,
-      default: () => new UnitRule(),
-    },
   },
-  data: () => ({
-    isReachMaxSupportedLang: false,
-    availableLang: ['vi', 'en'],
-  }),
+  data() {
+    return {
+      isReachMaxSupportedLang: false,
+      availableLang: ['vi', 'en'],
+      rules: {
+        language: [(v) => !!v || this.$t('requiredField')],
+        content: [(v) => !!v || this.$t('requiredField')],
+      },
+    }
+  },
   methods: {
     addMoreLang() {
       this.$emit('addItem')
