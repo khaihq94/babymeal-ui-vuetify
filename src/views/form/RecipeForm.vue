@@ -17,6 +17,7 @@
                 <v-autocomplete
                   :items="getTranslationItems(ages)"
                   :filter="customFilter"
+                  item-value="id"
                   item-text="content"
                   :label="$t('age')"
                   v-model="recipe.ageId"
@@ -26,6 +27,7 @@
                 <v-autocomplete
                   :items="getTranslationItems(dishes)"
                   :filter="customFilter"
+                  item-value="id"
                   item-text="content"
                   :label="$t('dish')"
                   v-model="recipe.dishId"
@@ -210,7 +212,7 @@ export default {
       this.recipe.names.splice(index, 1)
     },
     save() {
-      console.log(this.$route.params.id)
+      console.log(this.recipe)
     },
     getTranslationItems(items) {
       return MultilingualConverter.buildItemsByCurrentLanguage(items)

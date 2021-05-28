@@ -10,6 +10,7 @@
           :rules="form.language.rules"
         >
           <template v-slot:item="data">{{ $t(data.item) }}</template>
+          <template v-slot:selection="data">{{ $t(data.item) }}</template>
         </v-select>
       </v-col>
       <v-col col="6" lg="6">
