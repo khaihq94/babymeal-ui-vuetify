@@ -10,6 +10,8 @@ export const publicRoute = [
     component: LayoutAuth,
     meta: {
       title: 'Login',
+      public: true,
+      disableIfLoggedIn: true,
     },
     redirect: '/admin/auth/login',
     hidden: true,
@@ -19,6 +21,8 @@ export const publicRoute = [
         name: 'login',
         meta: {
           title: 'Login',
+          public: true,
+          disableIfLoggedIn: true,
         },
         component: () => import('@/views/auth/Login.vue'),
       },
@@ -30,6 +34,8 @@ export const publicRoute = [
     name: '404',
     meta: {
       title: 'Not Found',
+      public: true,
+      disableIfLoggedIn: true,
     },
     component: () => import('@/views/error/NotFound.vue'),
   },
@@ -39,6 +45,8 @@ export const publicRoute = [
     name: '500',
     meta: {
       title: 'Server Error',
+      public: true,
+      disableIfLoggedIn: true,
     },
     component: () => import('@/views/error/Error.vue'),
   },
@@ -66,6 +74,7 @@ export const protectedRoute = [
       //Recipe
       {
         path: '/admin/recipes',
+        name: 'recipes',
         meta: {
           title: 'recipe',
           icon: 'mdi-noodles',
@@ -78,7 +87,7 @@ export const protectedRoute = [
         component: RouteWrapper,
         meta: {
           title: 'recipe',
-          hidden: true
+          hidden: true,
         },
         children: [
           {
@@ -102,6 +111,7 @@ export const protectedRoute = [
       //Age
       {
         path: '/admin/ages',
+        name: 'ages',
         meta: {
           title: 'age',
           icon: 'mdi-baby',
@@ -113,7 +123,7 @@ export const protectedRoute = [
         component: RouteWrapper,
         meta: {
           title: 'age',
-          hidden: true
+          hidden: true,
         },
         children: [
           {
@@ -137,6 +147,7 @@ export const protectedRoute = [
       //Dish
       {
         path: '/admin/dishes',
+        name: 'dishes',
         meta: {
           title: 'dish',
           icon: 'mdi-silverware-fork-knife',
@@ -148,7 +159,7 @@ export const protectedRoute = [
         component: RouteWrapper,
         meta: {
           title: 'dish',
-          hidden: true
+          hidden: true,
         },
         children: [
           {
@@ -172,6 +183,7 @@ export const protectedRoute = [
       //Ingredient
       {
         path: '/admin/ingredients',
+        name: 'ingredients',
         meta: {
           title: 'ingredient',
           icon: 'mdi-corn',
@@ -183,7 +195,7 @@ export const protectedRoute = [
         component: RouteWrapper,
         meta: {
           title: 'ingredient',
-          hidden: true
+          hidden: true,
         },
         children: [
           {
@@ -207,6 +219,7 @@ export const protectedRoute = [
       //Unit
       {
         path: '/admin/units',
+        name: 'units',
         meta: {
           title: 'unit',
           icon: 'mdi-ruler',
@@ -218,7 +231,7 @@ export const protectedRoute = [
         component: RouteWrapper,
         meta: {
           title: 'unit',
-          hidden: true
+          hidden: true,
         },
         children: [
           {

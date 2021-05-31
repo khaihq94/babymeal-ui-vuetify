@@ -16,15 +16,17 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   NProgress.start()
   const token = store.getters.getAccessToken
-  if (to.name !== 'login') {
+  if (!to.meta.public) {
     if (token) {
       next()
     } else {
       next({ name: 'login', query: { redirect: to.path } })
     }
-  } else {
-    next()
   }
+  if(token && to.meta.disableIfLoggedIn) {
+    next({ name: 'dashboard' })
+  }
+  next()
 
   //auth route is authenticated
 })
