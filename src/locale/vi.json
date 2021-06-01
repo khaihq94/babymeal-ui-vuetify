@@ -27,6 +27,7 @@
   "quantity": "Số lượng",
   "preparationTime": "Thời gian chuẩn bị",
   "description": "Mô tả",
+  "sessionExpired": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
   "task": "Task",
   "CMS": "CMS",
   "widget": "Widget",

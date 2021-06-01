@@ -70,7 +70,7 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-btn color="primary" tile @click="save"> {{ $t('save') }} </v-btn>
         </v-card-actions>
       </v-card>

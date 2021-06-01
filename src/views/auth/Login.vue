@@ -98,7 +98,8 @@ export default {
       if (this.$refs.form.validate()) {
         this.loading = true
         this.$store
-          .dispatch('demoLogin', this.formModel)
+          // .dispatch('demoLogin', this.formModel)
+          .dispatch('login', this.formModel)
           .then(() => {
             const redirect = this.$route.query.redirect
             const route = redirect ? { path: redirect } : { path: '/admin/' }

@@ -7,7 +7,7 @@ const state = {
     text: '',
     color: '',
   },
-  locale: 'zh',
+  locale: 'vi',
   notificatons: [
     {
       title: 'New user registered',
