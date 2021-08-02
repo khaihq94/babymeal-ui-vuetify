@@ -107,11 +107,7 @@ export default {
             this.loading = false
           })
           .catch(() => {
-            window._VMA.$emit('SHOW_SNACKBAR', {
-              show: true,
-              text: 'Auth Failed',
-              color: 'error',
-            })
+            this.$store.dispatch('showErrorSnackbar', 'Auth Failed');
             this.loading = false
           })
       }

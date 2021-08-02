@@ -116,7 +116,7 @@ export const protectedRoute = [
           title: 'age',
           icon: 'mdi-baby',
         },
-        component: () => import('@/views/Ages.vue'),
+        component: () => import('@/views/age/list.vue'),
       },
       {
         path: '/admin/ages',
@@ -132,7 +132,7 @@ export const protectedRoute = [
             meta: {
               title: 'create',
             },
-            component: () => import('@/views/form/TranslationForm.vue'),
+            component: () => import('@/views/age/update.vue'),
           },
           {
             path: '/admin/ages/:id',
@@ -140,7 +140,7 @@ export const protectedRoute = [
             meta: {
               title: 'edit',
             },
-            component: () => import('@/views/form/TranslationForm.vue'),
+            component: () => import('@/views/age/update.vue'),
           },
         ],
       },
@@ -152,7 +152,7 @@ export const protectedRoute = [
           title: 'dish',
           icon: 'mdi-silverware-fork-knife',
         },
-        component: () => import('@/views/Dishes.vue'),
+        component: () => import('@/views/dish/list.vue'),
       },
       {
         path: '/admin/dishes',
@@ -168,7 +168,7 @@ export const protectedRoute = [
             meta: {
               title: 'create',
             },
-            component: () => import('@/views/form/TranslationForm.vue'),
+            component: () => import('@/views/dish/update.vue'),
           },
           {
             path: '/admin/dishes/:id',
@@ -176,7 +176,7 @@ export const protectedRoute = [
             meta: {
               title: 'edit',
             },
-            component: () => import('@/views/form/TranslationForm.vue'),
+            component: () => import('@/views/dish/update.vue'),
           },
         ],
       },
@@ -188,7 +188,7 @@ export const protectedRoute = [
           title: 'ingredient',
           icon: 'mdi-corn',
         },
-        component: () => import('@/views/Ingredients.vue'),
+        component: () => import('@/views/ingredient/list.vue'),
       },
       {
         path: '/admin/ingredients',
@@ -204,7 +204,7 @@ export const protectedRoute = [
             meta: {
               title: 'create',
             },
-            component: () => import('@/views/form/TranslationForm.vue'),
+            component: () => import('@/views/ingredient/update.vue'),
           },
           {
             path: '/admin/ingredients/:id',
@@ -212,7 +212,7 @@ export const protectedRoute = [
             meta: {
               title: 'edit',
             },
-            component: () => import('@/views/form/TranslationForm.vue'),
+            component: () => import('@/views/ingredient/update.vue'),
           },
         ],
       },

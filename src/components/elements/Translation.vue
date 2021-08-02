@@ -85,7 +85,7 @@ export default {
           rules: [(v) => !!v || this.$t('requiredField')],
         },
       },
-      availableLang: ['vi', 'en'],
+      availableLang: ["vi", "en"],
       extensions: [
         History,
         Blockquote,

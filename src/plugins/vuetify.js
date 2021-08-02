@@ -9,7 +9,7 @@ import i18n from './i18n'
 const vuetify = new Vuetify({
   lang: {
     t: (key, ...params) => i18n.t(key, params),
-    current: 'en',
+    current: 'vi',
   },
   theme: {
     options: {

@@ -5,6 +5,9 @@
       {{ $t('create') }}
     </v-btn>
     <v-data-table :headers="tableData.headers" :items="tableData.items" :items-per-page="5" class="elevation-1">
+      <template v-slot:[`item.name`]="{ item }">
+        {{ dynamicLocalization(item.name) }}
+      </template>
       <template v-slot:[`item.actions`]="{ item }">
         <v-btn color="teal" icon @click="editItem(item)">
           <v-icon class="mr-2"> mdi-pencil </v-icon>
@@ -29,23 +32,24 @@
 </template>
 
 <script>
+import DynamicLocalization from '@/mixins/dynamicLocalization'
+
 export default {
   components: {},
+  mixins: [DynamicLocalization],
   props: {
     tableData: {
       headers: [Object],
       items: [Object],
     },
-    redirectPageUrlName: {
-      create: String,
-      edit: String,
-    },
-    apiBaseUrl: String,
   },
-  data: () => ({
-    dialogDelete: false,
-    editedIndex: -1,
-  }),
+  data() {
+    return {
+      dialogDelete: false,
+      editedIndex: -1,
+      updatedId: '',
+    }
+  },
   watch: {
     dialogDelete(val) {
       val || this.closeDeleteDialog()
@@ -58,14 +62,14 @@ export default {
     editItem(item) {
       this.$router.push(this.$route.fullPath + '/' + item.id)
     },
-
     deleteItem(item) {
       this.editedIndex = this.tableData.items.indexOf(item)
+      this.updatedId = item.id
       this.dialogDelete = true
     },
 
     deleteItemConfirm() {
-      this.$emit('removeItem', this.editedIndex)
+      this.$emit('removeItem', this.editedIndex, this.updatedId)
       this.closeDeleteDialog()
     },
 

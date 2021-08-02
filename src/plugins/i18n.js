@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
-import store from '../store'
+import store from '@/store/index'
 import en from '@/locale/en.json'
 import vi from '@/locale/vi.json'
 const translation = {

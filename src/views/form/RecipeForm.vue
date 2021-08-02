@@ -87,7 +87,7 @@ import TranslationModel from '@/model/TranslationModel'
 import RecipeIngredientModel from '@/model/RecipeIngredientModel'
 
 export default {
-  name: 'TranslationForm',
+  name: 'recipe-form',
   components: {
     Translation,
     RecipeIngredient,

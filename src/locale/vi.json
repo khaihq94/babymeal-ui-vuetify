@@ -16,6 +16,7 @@
   "dish": "Loại món ăn",
   "ingredient": "Nguyên liệu",
   "create": "Tạo mới",
+  "actions": "Tác vụ",
   "edit": "Sửa",
   "requiredField": "Vui lòng nhập giá trị",
   "unit": "Đơn vị",
@@ -28,6 +29,7 @@
   "preparationTime": "Thời gian chuẩn bị",
   "description": "Mô tả",
   "sessionExpired": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+  "index": "ID",
   "task": "Task",
   "CMS": "CMS",
   "widget": "Widget",
@@ -50,6 +52,13 @@
   "create_user": "Create User",
   "changelog": "Changelog",
   "calendar": "Lịch",
+  "snackbar": {
+    "message": {
+      "create_successfully": "Tạo mới thành công",
+      "delete_successfully": "Xóa thành công",
+      "update_successfully": "Cập nhật thành công"
+    }
+  },
   "all": "All",
   "dir": "Directory",
   "element": "Element",

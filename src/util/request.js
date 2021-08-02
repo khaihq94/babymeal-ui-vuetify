@@ -21,18 +21,18 @@ const err = (error) => {
       store.commit('SHOW_SNACKBAR', { text: data.message, color: 'error' })
       break
     case 422:
-      store.commit('SHOW_SNACKBAR', { text: message, color: 'error' })
+      store.dispatch('showErrorSnackbar', message);
       break
     case 401:
-      store.commit('SHOW_SNACKBAR', { text: "Your session is expired, please log in again", color: 'error' })
+      store.dispatch('showErrorSnackbar', "sessionExpired");
       store.commit('SET_ACCESS_TOKEN', null)
       router.push({name: "login"})
       break
     case 403:
-      store.commit('SHOW_SNACKBAR', { text: message, color: 'error' })
+      store.dispatch('showErrorSnackbar', message);
       break
     case 500:
-      store.commit('SHOW_SNACKBAR', { text: 'server error', color: 'error' })
+      store.dispatch('showErrorSnackbar', 'server error');
       break
     default:
       break
