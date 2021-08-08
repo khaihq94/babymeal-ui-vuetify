@@ -1,5 +1,7 @@
 import axios from 'axios'
 import store from '@/store'
+import router from '@/router/'
+
 // create axios
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // api base_url
@@ -19,16 +21,18 @@ const err = (error) => {
       store.commit('SHOW_SNACKBAR', { text: data.message, color: 'error' })
       break
     case 422:
-      store.commit('SHOW_SNACKBAR', { text: message, color: 'error' })
+      store.dispatch('showErrorSnackbar', message);
       break
     case 401:
-      store.commit('SHOW_SNACKBAR', { text: message, color: 'error' })
+      store.dispatch('showErrorSnackbar', "sessionExpired");
+      store.commit('SET_ACCESS_TOKEN', null)
+      router.push({name: "login"})
       break
     case 403:
-      store.commit('SHOW_SNACKBAR', { text: message, color: 'error' })
+      store.dispatch('showErrorSnackbar', message);
       break
     case 500:
-      store.commit('SHOW_SNACKBAR', { text: 'server error', color: 'error' })
+      store.dispatch('showErrorSnackbar', 'server error');
       break
     default:
       break
@@ -40,7 +44,9 @@ const err = (error) => {
 service.interceptors.request.use((config) => {
   config.headers['Access-Control-Allow-Origin'] = '*'
   config.headers['Content-Type'] = 'application/json'
-  config.headers['Authorization'] = 'Bearer ' + store.getters.getAccessToken
+  if(store.getters.getAccessToken != null) {
+    config.headers['Authorization'] = 'Bearer ' + store.getters.getAccessToken
+  }
 
   return config
 }, err)

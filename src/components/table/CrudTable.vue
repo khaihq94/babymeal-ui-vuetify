@@ -1,13 +1,20 @@
 <template>
   <v-container>
-    <v-btn color="primary" tile class="mb-5" :to="createUrl">
+    <v-btn color="primary" tile class="mb-5" :to="getCreateUrl()">
       <v-icon left> mdi-plus </v-icon>
-      Create
+      {{ $t('create') }}
     </v-btn>
     <v-data-table :headers="tableData.headers" :items="tableData.items" :items-per-page="5" class="elevation-1">
+      <template v-slot:[`item.name`]="{ item }">
+        {{ dynamicLocalization(item.name) }}
+      </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-        <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+        <v-btn color="teal" icon @click="editItem(item)">
+          <v-icon class="mr-2"> mdi-pencil </v-icon>
+        </v-btn>
+        <v-btn color="red" icon @click="deleteItem(item)">
+          <v-icon> mdi-delete </v-icon>
+        </v-btn>
       </template>
     </v-data-table>
     <v-dialog v-model="dialogDelete" max-width="500px">
@@ -15,8 +22,8 @@
         <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-          <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+          <v-btn color="blue darken-1" outlined @click="closeDeleteDialog">Cancel</v-btn>
+          <v-btn color="red" outlined @click="deleteItemConfirm">OK</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
@@ -25,81 +32,48 @@
 </template>
 
 <script>
+import DynamicLocalization from '@/mixins/dynamicLocalization'
+
 export default {
   components: {},
+  mixins: [DynamicLocalization],
   props: {
     tableData: {
       headers: [Object],
       items: [Object],
     },
-    createUrl: Object
   },
-  data: () => ({
-    dialogDelete: false,
-    editedIndex: -1,
-    headers: [
-      {
-        text: 'Dessert (100g serving)',
-        align: 'start',
-        sortable: false,
-        value: 'name',
-      },
-      { text: 'Calories', value: 'calories' },
-      { text: 'Fat (g)', value: 'fat' },
-      { text: 'Carbs (g)', value: 'carbs' },
-      { text: 'Protein (g)', value: 'protein' },
-      { text: 'Iron (%)', value: 'iron' },
-      { text: 'Actions', value: 'actions', sortable: false },
-    ],
-    desserts: [
-      {
-        name: 'Frozen Yogurt',
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0,
-        iron: '1%',
-      },
-      {
-        name: 'Ice cream sandwich',
-        calories: 237,
-        fat: 9.0,
-        carbs: 37,
-        protein: 4.3,
-        iron: '1%',
-      },
-      {
-        name: 'Eclair',
-        calories: 262,
-        fat: 16.0,
-        carbs: 23,
-        protein: 6.0,
-        iron: '7%',
-      },
-    ],
-  }),
+  data() {
+    return {
+      dialogDelete: false,
+      editedIndex: -1,
+      updatedId: '',
+    }
+  },
   watch: {
     dialogDelete(val) {
-      val || this.closeDelete()
+      val || this.closeDeleteDialog()
     },
   },
   methods: {
-    editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item)
+    getCreateUrl() {
+      return this.$route.fullPath + '/create'
     },
-
+    editItem(item) {
+      this.$router.push(this.$route.fullPath + '/' + item.id)
+    },
     deleteItem(item) {
-      console.log('delete clicked')
-      this.editedIndex = this.desserts.indexOf(item)
+      this.editedIndex = this.tableData.items.indexOf(item)
+      this.updatedId = item.id
       this.dialogDelete = true
     },
 
     deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1)
-      this.closeDelete()
+      this.$emit('removeItem', this.editedIndex, this.updatedId)
+      this.closeDeleteDialog()
     },
 
-    closeDelete() {
+    closeDeleteDialog() {
       this.dialogDelete = false
       this.$nextTick(() => {
         this.editedIndex = -1

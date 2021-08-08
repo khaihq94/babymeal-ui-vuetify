@@ -32,7 +32,7 @@ const actions = {
   demoLogin({ commit }, { username, password }) {
     return new Promise((resolve, reject) => {
       if (username === 'admin' && password === 'admin') {
-        commit('SET_LOGIN', { access_token: 'demo', expires_in: 0 })
+        commit('SET_LOGIN', { token: 'demo', expires_in: 0 })
         return resolve({ message: 'success' })
       } else {
         return reject({ message: 'Auth Failed' })
@@ -41,7 +41,7 @@ const actions = {
   },
   login({ commit, dispatch }, { username, password }) {
     return request({
-      url: '/auth/login',
+      url: '/authenticate',
       method: 'post',
       data: {
         username,
@@ -49,17 +49,17 @@ const actions = {
       },
     }).then((resp) => {
       commit('SET_LOGIN', resp)
-      dispatch('fetchProfile')
+      // dispatch('fetchProfile')
     })
   },
   register({ commit, dispatch }, data) {
     return request({
-      url: '/auth/register',
+      url: '/register',
       method: 'post',
       data: data,
     }).then((resp) => {
       commit('SET_LOGIN', resp)
-      dispatch('fetchProfile')
+      // dispatch('fetchProfile')
       return resp
     })
   },
@@ -71,7 +71,7 @@ const actions = {
 
   fetchProfile({ commit, dispatch, rootState }) {
     return request({
-      url: '/me',
+      url: '/admin/me',
       method: 'get',
     }).then((resp) => {
       commit('SET_LOGIN_PROFILE', resp.data)
@@ -80,9 +80,9 @@ const actions = {
   },
 }
 const mutations = {
-  SET_LOGIN(state, { access_token, expires_in }) {
-    state.access_token = access_token
-    state.expires_in = expires_in
+  SET_LOGIN(state, { token, expires_in }) {
+    state.access_token = token
+    state.expires_in = expires_in | 0
   },
   SET_ACCESS_TOKEN(state, token) {
     state.access_token = token

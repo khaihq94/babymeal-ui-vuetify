@@ -98,19 +98,16 @@ export default {
       if (this.$refs.form.validate()) {
         this.loading = true
         this.$store
-          .dispatch('demoLogin', this.formModel)
+          // .dispatch('demoLogin', this.formModel)
+          .dispatch('login', this.formModel)
           .then(() => {
             const redirect = this.$route.query.redirect
-            const route = redirect ? { path: redirect } : { path: '/' }
+            const route = redirect ? { path: redirect } : { path: '/admin/' }
             this.$router.push(route)
             this.loading = false
           })
           .catch(() => {
-            window._VMA.$emit('SHOW_SNACKBAR', {
-              show: true,
-              text: 'Auth Failed',
-              color: 'error',
-            })
+            this.$store.dispatch('showErrorSnackbar', 'Auth Failed');
             this.loading = false
           })
       }

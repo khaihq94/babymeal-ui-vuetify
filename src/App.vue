@@ -18,7 +18,7 @@
       </template>
     </v-navigation-drawer>
     <!-- global snackbar -->
-    <v-snackbar v-model="snackbar.show" :timeout="3000" app top centered :color="snackbar.color">
+    <v-snackbar v-model="snackbar.show" app top centered :color="snackbar.color">
       {{ snackbar.text }}
       <template #action="{ attrs }">
         <v-btn icon v-bind="attrs" @click="$store.commit('HIDE_SNACKBAR')">

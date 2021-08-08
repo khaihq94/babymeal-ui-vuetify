@@ -142,7 +142,7 @@ export default {
           text: 'Logout successfull',
           color: 'success',
         })
-        this.$router.push('/auth/login')
+        this.$router.push('/admin/auth/login')
       }
     },
     handleChangeLocale({ value }) {

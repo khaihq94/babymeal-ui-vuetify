@@ -6,12 +6,14 @@ export const publicRoute = [
     component: () => import('@/views/error/NotFound.vue'),
   },
   {
-    path: '/auth',
+    path: '/admin/auth',
     component: LayoutAuth,
     meta: {
       title: 'Login',
+      public: true,
+      disableIfLoggedIn: true,
     },
-    redirect: '/auth/login',
+    redirect: '/admin/auth/login',
     hidden: true,
     children: [
       {
@@ -19,6 +21,8 @@ export const publicRoute = [
         name: 'login',
         meta: {
           title: 'Login',
+          public: true,
+          disableIfLoggedIn: true,
         },
         component: () => import('@/views/auth/Login.vue'),
       },
@@ -26,19 +30,23 @@ export const publicRoute = [
   },
 
   {
-    path: '/404',
+    path: '/admin/404',
     name: '404',
     meta: {
       title: 'Not Found',
+      public: true,
+      disableIfLoggedIn: true,
     },
     component: () => import('@/views/error/NotFound.vue'),
   },
 
   {
-    path: '/500',
+    path: '/admin/500',
     name: '500',
     meta: {
       title: 'Server Error',
+      public: true,
+      disableIfLoggedIn: true,
     },
     component: () => import('@/views/error/Error.vue'),
   },
@@ -46,16 +54,16 @@ export const publicRoute = [
 
 export const protectedRoute = [
   {
-    path: '/',
+    path: '/admin',
     component: LayoutDefault,
     meta: {
       title: 'home',
       icon: '',
     },
-    redirect: '/dashboard',
+    redirect: '/admin/dashboard',
     children: [
       {
-        path: '/dashboard',
+        path: '/admin/dashboard',
         name: 'dashboard',
         meta: {
           title: 'dashboard',
@@ -63,50 +71,190 @@ export const protectedRoute = [
         },
         component: () => import('@/views/Dashboard.vue'),
       },
-      //Age
+      //Recipe
       {
-        path: '/age',
+        path: '/admin/recipes',
+        name: 'recipes',
         meta: {
-          title: 'Age',
-          icon: 'mdi-baby',
+          title: 'recipe',
+          icon: 'mdi-noodles',
         },
-        name: 'Age',
-        props: (route) => ({
-          type: route.query.type,
-        }),
-        component: () => import('@/views/Ages.vue'),
+        name: 'Recipe',
+        component: () => import('@/views/Recipes.vue'),
       },
-      /* {
-        path: '/age/create',
-        meta: {
-          title: 'Age / Create',
-          hidden: true
-        },
-        name: 'age-create',
-        component: () => import('@/views/form/TranslationForm.vue'),
-      }, */
       {
-        path: '/age',
+        path: '/admin/recipes',
         component: RouteWrapper,
         meta: {
-          title: 'Age',
-          hidden: true
+          title: 'recipe',
+          hidden: true,
         },
-        redirect: '/age/create',
         children: [
           {
-            path: '/age/create',
+            path: '/admin/recipes/create',
+            name: 'recipe-create',
+            meta: {
+              title: 'create',
+            },
+            component: () => import('@/views/form/RecipeForm.vue'),
+          },
+          {
+            path: '/admin/recipes/:id',
+            name: 'recipe-edit',
+            meta: {
+              title: 'edit',
+            },
+            component: () => import('@/views/form/RecipeForm.vue'),
+          },
+        ],
+      },
+      //Age
+      {
+        path: '/admin/ages',
+        name: 'ages',
+        meta: {
+          title: 'age',
+          icon: 'mdi-baby',
+        },
+        component: () => import('@/views/age/list.vue'),
+      },
+      {
+        path: '/admin/ages',
+        component: RouteWrapper,
+        meta: {
+          title: 'age',
+          hidden: true,
+        },
+        children: [
+          {
+            path: '/admin/ages/create',
             name: 'age-create',
             meta: {
-              title: 'Create',
+              title: 'create',
             },
-            component: () => import('@/views/form/TranslationForm.vue'),
+            component: () => import('@/views/age/update.vue'),
+          },
+          {
+            path: '/admin/ages/:id',
+            name: 'age-edit',
+            meta: {
+              title: 'edit',
+            },
+            component: () => import('@/views/age/update.vue'),
+          },
+        ],
+      },
+      //Dish
+      {
+        path: '/admin/dishes',
+        name: 'dishes',
+        meta: {
+          title: 'dish',
+          icon: 'mdi-silverware-fork-knife',
+        },
+        component: () => import('@/views/dish/list.vue'),
+      },
+      {
+        path: '/admin/dishes',
+        component: RouteWrapper,
+        meta: {
+          title: 'dish',
+          hidden: true,
+        },
+        children: [
+          {
+            path: '/admin/dishes/create',
+            name: 'dish-create',
+            meta: {
+              title: 'create',
+            },
+            component: () => import('@/views/dish/update.vue'),
+          },
+          {
+            path: '/admin/dishes/:id',
+            name: 'dish-edit',
+            meta: {
+              title: 'edit',
+            },
+            component: () => import('@/views/dish/update.vue'),
+          },
+        ],
+      },
+      //Ingredient
+      {
+        path: '/admin/ingredients',
+        name: 'ingredients',
+        meta: {
+          title: 'ingredient',
+          icon: 'mdi-corn',
+        },
+        component: () => import('@/views/ingredient/list.vue'),
+      },
+      {
+        path: '/admin/ingredients',
+        component: RouteWrapper,
+        meta: {
+          title: 'ingredient',
+          hidden: true,
+        },
+        children: [
+          {
+            path: '/admin/ingredients/create',
+            name: 'ingredient-create',
+            meta: {
+              title: 'create',
+            },
+            component: () => import('@/views/ingredient/update.vue'),
+          },
+          {
+            path: '/admin/ingredients/:id',
+            name: 'ingredient-edit',
+            meta: {
+              title: 'edit',
+            },
+            component: () => import('@/views/ingredient/update.vue'),
+          },
+        ],
+      },
+      //Unit
+      {
+        path: '/admin/units',
+        name: 'units',
+        meta: {
+          title: 'unit',
+          icon: 'mdi-ruler',
+        },
+        component: () => import('@/views/Units.vue'),
+      },
+      {
+        path: '/admin/units',
+        component: RouteWrapper,
+        meta: {
+          title: 'unit',
+          hidden: true,
+        },
+        children: [
+          {
+            path: '/admin/units/create',
+            name: 'unit-create',
+            meta: {
+              title: 'create',
+            },
+            component: () => import('@/views/form/UnitForm.vue'),
+          },
+          {
+            path: '/admin/units/:id',
+            name: 'unit-edit',
+            meta: {
+              title: 'edit',
+            },
+            component: () => import('@/views/form/UnitForm.vue'),
           },
         ],
       },
       //calendar
       {
-        path: '/calendar',
+        path: '/admin/calendar',
         meta: {
           title: 'calendar',
           icon: 'mdi-calendar-check',
@@ -119,7 +267,7 @@ export const protectedRoute = [
       },
       //calendar
       {
-        path: '/kanboard',
+        path: '/admin/kanboard',
         meta: {
           title: 'kanboard',
           icon: 'mdi-drag-variant',
@@ -128,36 +276,36 @@ export const protectedRoute = [
         component: () => import('@/views/task/KanBoard.vue'),
       },
       {
-        path: '/chat',
+        path: '/admin/chat',
         meta: {
           title: 'chat',
           icon: 'mdi-chat',
           isNew: true,
         },
-        redirect: '/chat/messaging',
+        redirect: '/admin/chat/messaging',
       },
       {
-        path: '/media',
+        path: '/admin/media',
         meta: {
           title: 'media',
           icon: 'mdi-image',
           isNew: true,
         },
-        redirect: '/media/file',
+        redirect: '/admin/media/file',
       },
 
       //element
       {
-        path: '/element',
+        path: '/admin/element',
         component: RouteWrapper,
         meta: {
           title: 'element',
           icon: 'mdi-dots-square',
         },
-        redirect: '/element/cascader',
+        redirect: '/admin/element/cascader',
         children: [
           {
-            path: '/element/cascader',
+            path: '/admin/element/cascader',
             name: 'element.cascader',
             meta: {
               title: 'cascader',
@@ -169,26 +317,26 @@ export const protectedRoute = [
       },
       //task
       {
-        path: '/task',
+        path: '/admin/task',
         component: RouteWrapper,
-        redirect: '/task/list',
+        redirect: '/admin/task/list',
         meta: {
           title: 'task',
           icon: 'mdi-grid',
         },
         children: [
           {
-            path: '/task/list',
+            path: '/admin/task/list',
             name: 'task',
             meta: {
               title: 'task',
               icon: 'mdi-newspaper',
             },
-            redirect: '/task/list',
+            redirect: '/admin/task/list',
             component: RouteWrapper,
             children: [
               {
-                path: '/task/list',
+                path: '/admin/task/list',
                 name: 'task.list',
                 meta: {
                   title: 'task_list',
@@ -202,16 +350,16 @@ export const protectedRoute = [
       },
       //widgets
       {
-        path: '/widgets',
+        path: '/admin/widgets',
         component: RouteWrapper,
         meta: {
           title: 'widget',
           icon: 'mdi-widgets',
         },
-        redirect: '/widgets/social',
+        redirect: '/admin/widgets/social',
         children: [
           {
-            path: '/widgets/social',
+            path: '/admin/widgets/social',
             name: 'SocialWidget',
             meta: {
               title: 'social',
@@ -220,7 +368,7 @@ export const protectedRoute = [
             component: () => import('@/views/widgets/Social.vue'),
           },
           {
-            path: '/widgets/statistic',
+            path: '/admin/widgets/statistic',
             name: 'StatisticWidget',
             meta: {
               title: 'statistic',
@@ -232,16 +380,16 @@ export const protectedRoute = [
       },
       //form
       {
-        path: '/forms',
+        path: '/admin/forms',
         component: RouteWrapper,
         meta: {
           title: 'form',
           icon: 'mdi-form-textbox',
         },
-        redirect: '/forms/basic',
+        redirect: '/admin/forms/basic',
         children: [
           {
-            path: '/forms/basic',
+            path: '/admin/forms/basic',
             name: 'forms.basic',
             meta: {
               title: 'basic_form',
@@ -250,7 +398,7 @@ export const protectedRoute = [
             component: () => import('@/views/form/BasicForm.vue'),
           },
           {
-            path: '/forms/stepper',
+            path: '/admin/forms/stepper',
             name: 'forms.stepper',
             meta: {
               title: 'step_form',
@@ -262,16 +410,16 @@ export const protectedRoute = [
       },
       //chart
       {
-        path: '/chart',
+        path: '/admin/chart',
         component: RouteWrapper,
         meta: {
           title: 'chart',
           icon: 'mdi-chart-line',
         },
-        redirect: '/chart/echart',
+        redirect: '/admin/chart/echart',
         children: [
           {
-            path: '/chart/echart',
+            path: '/admin/chart/echart',
             name: 'echart',
             meta: {
               title: 'echart',
@@ -280,7 +428,7 @@ export const protectedRoute = [
             component: () => import('@/views/chart/Echart.vue'),
           },
           {
-            path: '/chart/g2',
+            path: '/admin/chart/g2',
             name: 'g2',
             meta: {
               title: 'g2',
@@ -292,7 +440,7 @@ export const protectedRoute = [
       },
 
       {
-        path: '/changelog',
+        path: '/admin/changelog',
         name: 'changelog',
         meta: {
           title: 'changelog',
@@ -301,7 +449,7 @@ export const protectedRoute = [
         component: () => import('@/views/Changelog.vue'),
       },
       {
-        path: '/403',
+        path: '/admin/403',
         name: 'Forbidden',
         meta: {
           title: 'access_denied',
@@ -313,17 +461,17 @@ export const protectedRoute = [
   },
   //media
   {
-    path: '/media',
+    path: '/admin/media',
     meta: {
       title: 'media',
       icon: 'mdi-image',
     },
     name: 'media',
     component: LayoutMedia,
-    redirect: '/media/file',
+    redirect: '/admin/media/file',
     children: [
       {
-        path: '/media/file',
+        path: '/admin/media/file',
         name: 'media.index',
         meta: {
           title: 'media manager',
@@ -332,7 +480,7 @@ export const protectedRoute = [
         component: () => import('@/views/media/MediaView.vue'),
       },
       {
-        path: '/media/:type',
+        path: '/admin/media/:type',
         name: 'media.type',
         meta: {
           title: 'media manager',
@@ -345,11 +493,11 @@ export const protectedRoute = [
   },
   // chat app
   {
-    path: '/chat',
+    path: '/admin/chat',
     name: 'Chat',
     component: LayoutChat,
     redirect: {
-      path: '/chat/messaging',
+      path: '/admin/chat/messaging',
     },
     meta: {
       title: 'Chat',
@@ -357,7 +505,7 @@ export const protectedRoute = [
     },
     children: [
       {
-        path: '/chat/messaging/:uuid?',
+        path: '/admin/chat/messaging/:uuid?',
         name: 'ChatMessaging',
         props: true,
         component: () => import('@/views/chat/ChatMessaging.vue'),

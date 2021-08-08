@@ -1,14 +1,15 @@
 import Vue from 'vue'
 
 import Vuetify from 'vuetify/lib'
+import { TiptapVuetifyPlugin } from 'tiptap-vuetify'
+import 'tiptap-vuetify/dist/main.css'
 import store from '../store'
 import i18n from './i18n'
-Vue.use(Vuetify)
 
-export default new Vuetify({
+const vuetify = new Vuetify({
   lang: {
     t: (key, ...params) => i18n.t(key, params),
-    current: 'en',
+    current: 'vi',
   },
   theme: {
     options: {
@@ -27,3 +28,11 @@ export default new Vuetify({
     },
   },
 })
+
+Vue.use(Vuetify)
+Vue.use(TiptapVuetifyPlugin, {
+  vuetify,
+  iconsGroup: 'mdi'
+})
+
+export default vuetify

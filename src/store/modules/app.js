@@ -1,3 +1,5 @@
+// import i18n from '../../plugins/i18n'
+
 const state = {
   mode: 'light',
   themeColor: '#2196f3',
@@ -6,8 +8,9 @@ const state = {
     show: false,
     text: '',
     color: '',
+    timeout: 3000,
   },
-  locale: 'zh',
+  locale: 'vi',
   notificatons: [
     {
       title: 'New user registered',
@@ -59,6 +62,14 @@ const actions = {
   clearNotificaton({ commit }) {
     commit('CLEAR_NOTIFICATION')
   },
+  showSuccessSnackbar({ commit }, text) {
+    commit('SHOW_SNACKBAR', { text: text, color: 'success' })
+    setTimeout(function(){ commit('HIDE_SNACKBAR') }, 3000);
+  },
+  showErrorSnackbar({ commit }, text) {
+    commit('SHOW_SNACKBAR', { text: text, color: 'error' })
+    setTimeout(function(){ commit('HIDE_SNACKBAR') }, 3000);
+  },
 }
 
 // mutations
@@ -85,6 +96,8 @@ const mutations = {
   },
   HIDE_SNACKBAR(state) {
     state.snackbar.show = false
+    state.snackbar.text = ""
+    state.snackbar.color = ""
   },
 }
 
