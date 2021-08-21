@@ -224,7 +224,7 @@ export const protectedRoute = [
           title: 'unit',
           icon: 'mdi-ruler',
         },
-        component: () => import('@/views/Units.vue'),
+        component: () => import('@/views/unit/list.vue'),
       },
       {
         path: '/admin/units',
@@ -240,7 +240,7 @@ export const protectedRoute = [
             meta: {
               title: 'create',
             },
-            component: () => import('@/views/form/UnitForm.vue'),
+            component: () => import('@/views/unit/update.vue'),
           },
           {
             path: '/admin/units/:id',
@@ -248,7 +248,7 @@ export const protectedRoute = [
             meta: {
               title: 'edit',
             },
-            component: () => import('@/views/form/UnitForm.vue'),
+            component: () => import('@/views/unit/update.vue'),
           },
         ],
       },
