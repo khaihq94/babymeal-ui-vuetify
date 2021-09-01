@@ -1,5 +1,5 @@
 <template>
-  <div class="page-dishes">
+  <div class="page-units">
     <v-container>
       <crud-table :tableData="tableData" @removeItem="removeItem" />
     </v-container>
@@ -11,7 +11,7 @@ import CrudTable from '@/components/table/CrudTable'
 import request from '@/util/request'
 
 export default {
-  name: 'dish-list',
+  name: 'unit-list',
   components: {
     CrudTable,
   },
@@ -25,7 +25,7 @@ export default {
         ],
         items: [],
       },
-      baseApiUrl: '/auth/dishes',
+      baseApiUrl: '/auth/units',
     }
   },
   mounted() {
