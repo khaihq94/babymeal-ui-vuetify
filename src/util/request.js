@@ -25,7 +25,7 @@ const err = (error) => {
       break
     case 401:
       store.dispatch('showErrorSnackbar', "sessionExpired");
-      store.commit('SET_ACCESS_TOKEN', null)
+      store.commit('SET_LOGOUT_MODE')
       router.push({name: "login"})
       break
     case 403:

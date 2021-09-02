@@ -35,7 +35,6 @@ export const publicRoute = [
     meta: {
       title: 'Not Found',
       public: true,
-      disableIfLoggedIn: true,
     },
     component: () => import('@/views/error/NotFound.vue'),
   },
@@ -46,7 +45,6 @@ export const publicRoute = [
     meta: {
       title: 'Server Error',
       public: true,
-      disableIfLoggedIn: true,
     },
     component: () => import('@/views/error/Error.vue'),
   },
