@@ -60,6 +60,17 @@
         <v-icon @click="handleGoBack" v-text="'mdi-arrow-left'" />
       </v-btn>
     </v-toolbar>
+    <v-dialog v-model="logoutDialog" max-width="500px">
+      <v-card>
+        <v-card-title class="headline"> {{ $t('dialog.title.logout') }} </v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" outlined @click="closeLogoutDialog"> {{ $t('dialog.button.no') }} </v-btn>
+          <v-btn color="red" outlined @click="handleLogout"> {{ $t('dialog.button.yes') }} </v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-app-bar>
 </template>
 <script>
@@ -84,22 +95,23 @@ export default {
         {
           icon: 'mdi-account',
           href: '#',
-          title: 'Profile',
+          title: this.$t("profile"),
           click: this.handleProfile,
         },
         {
           icon: 'mdi-cog',
           href: '#',
-          title: 'Settings',
+          title: this.$t("setting"),
           click: this.handleSetting,
         },
         {
           icon: 'mdi-power',
           href: '#',
-          title: 'Logout',
-          click: this.handleLogut,
+          title: this.$t("logout"),
+          click: this.showLogoutDialog,
         },
       ],
+      logoutDialog: false
     }
   },
   computed: {
@@ -126,15 +138,16 @@ export default {
     handleFullScreen() {
       Util.toggleFullScreen()
     },
-    handleLogut() {
-      if (window.confirm('Are you sure to logout?')) {
-        this.$store.dispatch('logout')
-        window._VMA.$emit('SHOW_SNACKBAR', {
-          text: 'Logout successfull',
-          color: 'success',
-        })
-        this.$router.push('/admin/auth/login')
-      }
+    closeLogoutDialog() {
+      this.logoutDialog = false
+    },
+    showLogoutDialog() {
+      this.logoutDialog = true
+    },
+    handleLogout() {
+      this.$store.dispatch('logout')
+      this.$store.dispatch('showSuccessSnackbar', this.$t('snackbar.message.logout_successfully'))
+      this.$router.push('/admin/auth/login')
     },
 
     handleSetting() {},

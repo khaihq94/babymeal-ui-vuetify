@@ -18,7 +18,7 @@ const err = (error) => {
   }
   switch (status) {
     case 400:
-      store.commit('SHOW_SNACKBAR', { text: data.message, color: 'error' })
+      store.dispatch('showErrorSnackbar', message);
       break
     case 422:
       store.dispatch('showErrorSnackbar', message);
@@ -55,7 +55,7 @@ service.interceptors.request.use((config) => {
 
 service.interceptors.response.use(({ data, config }) => {
   if (['put', 'post', 'delete', 'patch'].includes(config.method) && data.meta) {
-    store.commit('SHOW_SNACKBAR', { text: data.meta.message, color: 'success' })
+    store.dispatch('showSuccessSnackbar', data.meta.message);
   }
 
   return data
