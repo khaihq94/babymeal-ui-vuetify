@@ -60,17 +60,12 @@
         <v-icon @click="handleGoBack" v-text="'mdi-arrow-left'" />
       </v-btn>
     </v-toolbar>
-    <v-dialog v-model="logoutDialog" max-width="500px">
-      <v-card>
-        <v-card-title class="headline"> {{ $t('dialog.title.logout') }} </v-card-title>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" outlined @click="closeLogoutDialog"> {{ $t('dialog.button.no') }} </v-btn>
-          <v-btn color="red" outlined @click="handleLogout"> {{ $t('dialog.button.yes') }} </v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <app-dialog :isShowed="isShowLogoutDialog" 
+      :title="$t('dialog.title.logout')"
+      :confirmLabel="$t('dialog.button.yes')"
+      :closeLabel="$t('dialog.button.no')"
+      @onClickConfirm="handleLogout"
+      @onClickCancel="closeLogoutDialog" />
   </v-app-bar>
 </template>
 <script>
@@ -79,12 +74,15 @@ import LocaleSwitch from '@/components/locale/LocaleSwitch'
 import CAvatar from '@/components/avatar/CAvatar'
 import Util from '@/util'
 import { mapGetters } from 'vuex'
+import AppDialog from '@/components/common/AppDialog'
+
 export default {
   name: 'AppToolbar',
   components: {
     LocaleSwitch,
     NotificationList,
     CAvatar,
+    AppDialog
   },
   props: {
     extended: Boolean,
@@ -111,7 +109,7 @@ export default {
           click: this.showLogoutDialog,
         },
       ],
-      logoutDialog: false
+      isShowLogoutDialog: false
     }
   },
   computed: {
@@ -139,10 +137,10 @@ export default {
       Util.toggleFullScreen()
     },
     closeLogoutDialog() {
-      this.logoutDialog = false
+      this.isShowLogoutDialog = false
     },
     showLogoutDialog() {
-      this.logoutDialog = true
+      this.isShowLogoutDialog = true
     },
     handleLogout() {
       this.$store.dispatch('logout')
