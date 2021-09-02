@@ -17,25 +17,21 @@
         </v-btn>
       </template>
     </v-data-table>
-    <v-dialog v-model="dialogDelete" max-width="500px">
-      <v-card>
-        <v-card-title class="headline"> {{ $t('dialog.title.delete_item') }} </v-card-title>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" outlined @click="closeDeleteDialog"> {{ $t('dialog.button.cancel') }} </v-btn>
-          <v-btn color="red" outlined @click="deleteItemConfirm"> {{ $t('dialog.button.yes') }} </v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <app-dialog :isShowed="dialogDelete" 
+      :title="$t('dialog.title.delete_item')"
+      :confirmLabel="$t('dialog.button.yes')"
+      :closeLabel="$t('dialog.button.cancel')"
+      @onClickConfirm="closeDeleteDialog"
+      @onClickCancel="deleteItemConfirm" />
   </v-container>
 </template>
 
 <script>
 import DynamicLocalization from '@/mixins/dynamicLocalization'
+import AppDialog from '@/components/common/AppDialog'
 
 export default {
-  components: {},
+  components: {AppDialog},
   mixins: [DynamicLocalization],
   props: {
     tableData: {
