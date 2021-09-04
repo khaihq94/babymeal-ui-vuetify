@@ -50,7 +50,7 @@ export default {
     return {
       contents: [],
       baseApiUrl: '/auth/ingredients',
-      postRedirectPagePath: '/admin/ingredients',
+      postRedirectPagePath: '/admin/babymeal/ingredients',
       isEditing: false
     }
   },

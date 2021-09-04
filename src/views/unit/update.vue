@@ -20,7 +20,6 @@
 
 <script>
 import Unit from '@/components/elements/Unit'
-import UnitModel from '@/model/UnitModel'
 import UnitContentModel from '@/model/UnitContentModel'
 import request from '@/util/request'
 import UnitModelMapper from '@/mapper/UnitModelMapper'
@@ -52,7 +51,7 @@ export default {
     return {
       contents: [],
       baseApiUrl: '/auth/units',
-      postRedirectPagePath: '/admin/units',
+      postRedirectPagePath: '/admin/babymeal/units',
       isEditing: false
     }
   },

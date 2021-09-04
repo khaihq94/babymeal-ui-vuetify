@@ -15,18 +15,20 @@ const router = new Router({
 // router gards
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  const token = store.getters.getAccessToken
+  const isTokenExpired = store.getters.getExpiredDate < Date.now();
   if (!to.meta.public) {
-    if (token) {
-      next()
-    } else {
+    if (isTokenExpired) {
+      store.commit("SET_LOGOUT_MODE")
       next({ name: 'login', query: { redirect: to.path } })
+    } else {
+      next()
     }
   }
-  if(token && to.meta.disableIfLoggedIn) {
+  if(!isTokenExpired && to.meta.disableIfLoggedIn) {
     next({ name: 'dashboard' })
+  } else {
+    next()
   }
-  next()
 
   //auth route is authenticated
 })

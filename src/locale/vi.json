@@ -3,6 +3,9 @@
   "vi": "Tiếng Việt",
   "user": "user|users",
   "login": "Đăng nhập",
+  "logout": "Đăng xuất",
+  "setting": "Cài đặt",
+  "profile": "Cá nhân",
   "register": "Đăng ký",
   "username": "Tên đăng nhập",
   "password": "Mật khẩu",
@@ -11,10 +14,13 @@
   "home": "Trang chủ",
   "media": "Media",
   "dashboard": "Bảng điều khiển",
-  "recipe": "Công thức",
-  "age": "Độ tuổi",
-  "dish": "Loại món ăn",
-  "ingredient": "Nguyên liệu",
+  "babymeal": {
+    "title": "BabyMeal",
+    "recipe": "Công thức",
+    "age": "Độ tuổi",
+    "dish": "Loại món ăn",
+    "ingredient": "Nguyên liệu"
+  },
   "create": "Tạo mới",
   "actions": "Tác vụ",
   "edit": "Sửa",
@@ -56,7 +62,20 @@
     "message": {
       "create_successfully": "Tạo mới thành công",
       "delete_successfully": "Xóa thành công",
-      "update_successfully": "Cập nhật thành công"
+      "update_successfully": "Cập nhật thành công",
+      "logout_successfully": "Đăng xuất thành công"
+    }
+  },
+  "dialog": {
+    "title": {
+      "delete_item": "Bạn có chắc chắn muốn xóa không?",
+      "logout": "Bạn có muốn đăng xuất không?"
+    },
+    "button": {
+      "yes": "Có",
+      "no": "Không",
+      "cancel": "Hủy",
+      "ok": "OK"
     }
   },
   "all": "All",

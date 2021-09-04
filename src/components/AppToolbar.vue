@@ -60,6 +60,12 @@
         <v-icon @click="handleGoBack" v-text="'mdi-arrow-left'" />
       </v-btn>
     </v-toolbar>
+    <app-dialog :isShowed="isShowLogoutDialog" 
+      :title="$t('dialog.title.logout')"
+      :confirmLabel="$t('dialog.button.yes')"
+      :closeLabel="$t('dialog.button.no')"
+      @onClickConfirm="handleLogout"
+      @onClickCancel="closeLogoutDialog" />
   </v-app-bar>
 </template>
 <script>
@@ -68,12 +74,15 @@ import LocaleSwitch from '@/components/locale/LocaleSwitch'
 import CAvatar from '@/components/avatar/CAvatar'
 import Util from '@/util'
 import { mapGetters } from 'vuex'
+import AppDialog from '@/components/common/AppDialog'
+
 export default {
   name: 'AppToolbar',
   components: {
     LocaleSwitch,
     NotificationList,
     CAvatar,
+    AppDialog
   },
   props: {
     extended: Boolean,
@@ -84,22 +93,23 @@ export default {
         {
           icon: 'mdi-account',
           href: '#',
-          title: 'Profile',
+          title: this.$t("profile"),
           click: this.handleProfile,
         },
         {
           icon: 'mdi-cog',
           href: '#',
-          title: 'Settings',
+          title: this.$t("setting"),
           click: this.handleSetting,
         },
         {
           icon: 'mdi-power',
           href: '#',
-          title: 'Logout',
-          click: this.handleLogut,
+          title: this.$t("logout"),
+          click: this.showLogoutDialog,
         },
       ],
+      isShowLogoutDialog: false
     }
   },
   computed: {
@@ -126,15 +136,16 @@ export default {
     handleFullScreen() {
       Util.toggleFullScreen()
     },
-    handleLogut() {
-      if (window.confirm('Are you sure to logout?')) {
-        this.$store.dispatch('logout')
-        window._VMA.$emit('SHOW_SNACKBAR', {
-          text: 'Logout successfull',
-          color: 'success',
-        })
-        this.$router.push('/admin/auth/login')
-      }
+    closeLogoutDialog() {
+      this.isShowLogoutDialog = false
+    },
+    showLogoutDialog() {
+      this.isShowLogoutDialog = true
+    },
+    handleLogout() {
+      this.$store.dispatch('logout')
+      this.$store.dispatch('showSuccessSnackbar', this.$t('snackbar.message.logout_successfully'))
+      this.$router.push('/admin/auth/login')
     },
 
     handleSetting() {},
