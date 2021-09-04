@@ -14,10 +14,13 @@
   "home": "Trang chủ",
   "media": "Media",
   "dashboard": "Bảng điều khiển",
-  "recipe": "Công thức",
-  "age": "Độ tuổi",
-  "dish": "Loại món ăn",
-  "ingredient": "Nguyên liệu",
+  "babymeal": {
+    "title": "BabyMeal",
+    "recipe": "Công thức",
+    "age": "Độ tuổi",
+    "dish": "Loại món ăn",
+    "ingredient": "Nguyên liệu"
+  },
   "create": "Tạo mới",
   "actions": "Tác vụ",
   "edit": "Sửa",

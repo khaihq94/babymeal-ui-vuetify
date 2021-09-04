@@ -69,184 +69,195 @@ export const protectedRoute = [
         },
         component: () => import('@/views/Dashboard.vue'),
       },
-      //Recipe
       {
-        path: '/admin/recipes',
-        name: 'recipes',
-        meta: {
-          title: 'recipe',
-          icon: 'mdi-noodles',
-        },
-        name: 'Recipe',
-        component: () => import('@/views/Recipes.vue'),
-      },
-      {
-        path: '/admin/recipes',
+        path: '/admin/babymeal',
         component: RouteWrapper,
         meta: {
-          title: 'recipe',
-          hidden: true,
-        },
-        children: [
-          {
-            path: '/admin/recipes/create',
-            name: 'recipe-create',
-            meta: {
-              title: 'create',
-            },
-            component: () => import('@/views/form/RecipeForm.vue'),
-          },
-          {
-            path: '/admin/recipes/:id',
-            name: 'recipe-edit',
-            meta: {
-              title: 'edit',
-            },
-            component: () => import('@/views/form/RecipeForm.vue'),
-          },
-        ],
-      },
-      //Age
-      {
-        path: '/admin/ages',
-        name: 'ages',
-        meta: {
-          title: 'age',
-          icon: 'mdi-baby',
-        },
-        component: () => import('@/views/age/list.vue'),
-      },
-      {
-        path: '/admin/ages',
-        component: RouteWrapper,
-        meta: {
-          title: 'age',
-          hidden: true,
-        },
-        children: [
-          {
-            path: '/admin/ages/create',
-            name: 'age-create',
-            meta: {
-              title: 'create',
-            },
-            component: () => import('@/views/age/update.vue'),
-          },
-          {
-            path: '/admin/ages/:id',
-            name: 'age-edit',
-            meta: {
-              title: 'edit',
-            },
-            component: () => import('@/views/age/update.vue'),
-          },
-        ],
-      },
-      //Dish
-      {
-        path: '/admin/dishes',
-        name: 'dishes',
-        meta: {
-          title: 'dish',
+          title: 'babymeal.title',
           icon: 'mdi-silverware-fork-knife',
         },
-        component: () => import('@/views/dish/list.vue'),
-      },
-      {
-        path: '/admin/dishes',
-        component: RouteWrapper,
-        meta: {
-          title: 'dish',
-          hidden: true,
-        },
+        redirect: '/admin/babymeal/recipes',
         children: [
+          //Recipe
           {
-            path: '/admin/dishes/create',
-            name: 'dish-create',
+            path: '/admin/babymeal/recipes',
+            name: 'recipes',
             meta: {
-              title: 'create',
+              title: 'babymeal.recipe',
+              icon: 'mdi-noodles',
             },
-            component: () => import('@/views/dish/update.vue'),
+            name: 'Recipe',
+            component: () => import('@/views/Recipes.vue'),
           },
           {
-            path: '/admin/dishes/:id',
-            name: 'dish-edit',
+            path: '/admin/babymeal/recipes',
+            component: RouteWrapper,
             meta: {
-              title: 'edit',
+              title: 'babymeal.recipe',
+              hidden: true,
             },
-            component: () => import('@/views/dish/update.vue'),
+            children: [
+              {
+                path: '/admin/babymeal/recipes/create',
+                name: 'recipe-create',
+                meta: {
+                  title: 'create',
+                },
+                component: () => import('@/views/form/RecipeForm.vue'),
+              },
+              {
+                path: '/admin/babymeal/recipes/:id',
+                name: 'recipe-edit',
+                meta: {
+                  title: 'edit',
+                },
+                component: () => import('@/views/form/RecipeForm.vue'),
+              },
+            ],
           },
-        ],
-      },
-      //Ingredient
-      {
-        path: '/admin/ingredients',
-        name: 'ingredients',
-        meta: {
-          title: 'ingredient',
-          icon: 'mdi-corn',
-        },
-        component: () => import('@/views/ingredient/list.vue'),
-      },
-      {
-        path: '/admin/ingredients',
-        component: RouteWrapper,
-        meta: {
-          title: 'ingredient',
-          hidden: true,
-        },
-        children: [
+          //Age
           {
-            path: '/admin/ingredients/create',
-            name: 'ingredient-create',
+            path: '/admin/babymeal/ages',
+            name: 'ages',
             meta: {
-              title: 'create',
+              title: 'babymeal.age',
+              icon: 'mdi-baby',
             },
-            component: () => import('@/views/ingredient/update.vue'),
-          },
-          {
-            path: '/admin/ingredients/:id',
-            name: 'ingredient-edit',
-            meta: {
-              title: 'edit',
-            },
-            component: () => import('@/views/ingredient/update.vue'),
-          },
-        ],
-      },
-      //Unit
-      {
-        path: '/admin/units',
-        name: 'units',
-        meta: {
-          title: 'unit',
-          icon: 'mdi-ruler',
-        },
-        component: () => import('@/views/unit/list.vue'),
-      },
-      {
-        path: '/admin/units',
-        component: RouteWrapper,
-        meta: {
-          title: 'unit',
-          hidden: true,
-        },
-        children: [
-          {
-            path: '/admin/units/create',
-            name: 'unit-create',
-            meta: {
-              title: 'create',
-            },
-            component: () => import('@/views/unit/update.vue'),
+            component: () => import('@/views/age/list.vue'),
           },
           {
-            path: '/admin/units/:id',
-            name: 'unit-edit',
+            path: '/admin/babymeal/ages',
+            component: RouteWrapper,
             meta: {
-              title: 'edit',
+              title: 'babymeal.age',
+              hidden: true,
             },
-            component: () => import('@/views/unit/update.vue'),
+            children: [
+              {
+                path: '/admin/babymeal/ages/create',
+                name: 'age-create',
+                meta: {
+                  title: 'create',
+                },
+                component: () => import('@/views/age/update.vue'),
+              },
+              {
+                path: '/admin/babymeal/ages/:id',
+                name: 'age-edit',
+                meta: {
+                  title: 'edit',
+                },
+                component: () => import('@/views/age/update.vue'),
+              },
+            ],
+          },
+          //Dish
+          {
+            path: '/admin/babymeal/dishes',
+            name: 'dishes',
+            meta: {
+              title: 'babymeal.dish',
+              icon: 'mdi-silverware-fork-knife',
+            },
+            component: () => import('@/views/dish/list.vue'),
+          },
+          {
+            path: '/admin/babymeal/dishes',
+            component: RouteWrapper,
+            meta: {
+              title: 'babymeal.dish',
+              hidden: true,
+            },
+            children: [
+              {
+                path: '/admin/babymeal/dishes/create',
+                name: 'dish-create',
+                meta: {
+                  title: 'create',
+                },
+                component: () => import('@/views/dish/update.vue'),
+              },
+              {
+                path: '/admin/babymeal/dishes/:id',
+                name: 'dish-edit',
+                meta: {
+                  title: 'edit',
+                },
+                component: () => import('@/views/dish/update.vue'),
+              },
+            ],
+          },
+          //Ingredient
+          {
+            path: '/admin/babymeal/ingredients',
+            name: 'ingredients',
+            meta: {
+              title: 'babymeal.ingredient',
+              icon: 'mdi-corn',
+            },
+            component: () => import('@/views/ingredient/list.vue'),
+          },
+          {
+            path: '/admin/babymeal/ingredients',
+            component: RouteWrapper,
+            meta: {
+              title: 'babymeal.ingredient',
+              hidden: true,
+            },
+            children: [
+              {
+                path: '/admin/babymeal/ingredients/create',
+                name: 'ingredient-create',
+                meta: {
+                  title: 'create',
+                },
+                component: () => import('@/views/ingredient/update.vue'),
+              },
+              {
+                path: '/admin/babymeal/ingredients/:id',
+                name: 'ingredient-edit',
+                meta: {
+                  title: 'edit',
+                },
+                component: () => import('@/views/ingredient/update.vue'),
+              },
+            ],
+          },
+          //Unit
+          {
+            path: '/admin/babymeal/units',
+            name: 'units',
+            meta: {
+              title: 'babymeal.unit',
+              icon: 'mdi-ruler',
+            },
+            component: () => import('@/views/unit/list.vue'),
+          },
+          {
+            path: '/admin/babymeal/units',
+            component: RouteWrapper,
+            meta: {
+              title: 'babymeal.unit',
+              hidden: true,
+            },
+            children: [
+              {
+                path: '/admin/babymeal/units/create',
+                name: 'unit-create',
+                meta: {
+                  title: 'create',
+                },
+                component: () => import('@/views/unit/update.vue'),
+              },
+              {
+                path: '/admin/babymeal/units/:id',
+                name: 'unit-edit',
+                meta: {
+                  title: 'edit',
+                },
+                component: () => import('@/views/unit/update.vue'),
+              },
+            ],
           },
         ],
       },
@@ -263,7 +274,7 @@ export const protectedRoute = [
         }),
         component: () => import('@/views/Calendar.vue'),
       },
-      //calendar
+      //Kanboard
       {
         path: '/admin/kanboard',
         meta: {
@@ -291,7 +302,6 @@ export const protectedRoute = [
         },
         redirect: '/admin/media/file',
       },
-
       //element
       {
         path: '/admin/element',

@@ -14,10 +14,13 @@
   "home": "Home",
   "media": "Media",
   "dashboard": "Dashboard",
-  "recipe": "Recipes",
-  "age": "Ages",
-  "dish": "Dishes",
-  "ingredient": "Ingredients",
+  "babymeal": {
+    "title": "BabyMeal",
+    "recipe": "Recipes",
+    "age": "Ages",
+    "dish": "Dishes",
+    "ingredient": "Ingredients"
+  },
   "create": "Create",
   "actions": "Actions",
   "edit": "Edit",

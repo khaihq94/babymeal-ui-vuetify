@@ -21,8 +21,8 @@
       :title="$t('dialog.title.delete_item')"
       :confirmLabel="$t('dialog.button.yes')"
       :closeLabel="$t('dialog.button.cancel')"
-      @onClickConfirm="closeDeleteDialog"
-      @onClickCancel="deleteItemConfirm" />
+      @onClickConfirm="deleteItemConfirm"
+      @onClickCancel="closeDeleteDialog" />
   </v-container>
 </template>
 
